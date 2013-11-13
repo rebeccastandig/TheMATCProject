@@ -34,7 +34,6 @@ venv
 test_twython
 
 #templates
-model.py
 static
 templates
 forms.py
