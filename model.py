@@ -225,8 +225,28 @@ def check_if_user(user):
 	user_name = 'user_%s'%user
 	return r_server.exists(user_name)
 
-def auth_login(user, pw):
-	pass
+def check_alphanum(string):
+	# checks if a string is A-Z, a-z, 0-9 characters only; ord() must be b/t 48 and 122
+	for item in string:
+		alphanum = True
+		if ord(item) < 48:
+			alphanum = False
+			return alphanum
+		elif ord(item) > 122:
+			alphanum = False
+			return alphanum
+	return alphanum
+
+
+def auth_login(user_name, pw):
+	name_key = 'user_%s'%user_name
+	user_info = get_list(name_key)
+	password = get_string_num(user_info[1])
+	authenticated = False
+	if user_name == user_info[0]:
+		if md5_hash(pw) == password:
+			authenticated = True
+	return authenticated
 
 
 def main():
