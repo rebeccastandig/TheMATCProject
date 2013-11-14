@@ -13,4 +13,4 @@ tweet = stream.statuses.filter(track='twitter', language='en')
 
 result = parse_tweets(tweet)
 
-print result.get()
+result.get()
