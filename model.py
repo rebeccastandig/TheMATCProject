@@ -1,6 +1,10 @@
 import redis
+import hashlib
 
 r_server = redis.StrictRedis(host="localhost", port=6379, db=1)
+
+def md5_hash(password):
+    return hashlib.md5(password).hexdigest()
 
 def get_list(key):
 	# returns list via key
@@ -52,8 +56,9 @@ def set_user_pw(user, pw):
 	# sets user_(name)_pw
 	# user & pw must be strings
 	user_name_pw = 'user_%s_pw'%user
-	r_server.set(user_name_pw, pw)
-	# HASHING deal with this somehow. here? look at flask stuff
+	password = md5_hash(pw)
+	r_server.set(user_name_pw, password)
+
 
 def add_all_words(game_word_list):
 	# sets & appends to words.
@@ -213,6 +218,16 @@ def set_game_words_tweets(word_list, tweet):
 		set_word(word)
 		add_word_tweets(word, tweet)
 	print "success"
+
+def check_if_user(user):
+	# checks to see if user_(name) exists for user.
+	# returns True or False
+	user_name = 'user_%s'%user
+	return r_server.exists(user_name)
+
+def auth_login(user, pw):
+	pass
+
 
 def main():
     pass
