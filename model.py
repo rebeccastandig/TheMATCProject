@@ -8,12 +8,14 @@ def get_list(key):
 	return r_server.lrange(key, 0, -1)
 
 def get_num_list(key):
-	# returns length of a list, retrieved via key
+	# returns len(list), retrieved via key
+	# returns 0 if key hadn't been created prior to checking
 	return r_server.llen(key)
 
 def get_string_num(key):
 	# returns string via key.
 	# value of key can be either string or number
+	# doesn't return anything if key hadn't been created prior to checking
 	return r_server.get(key)
 
 def set_word(word):
@@ -55,7 +57,7 @@ def set_user_pw(user, pw):
 
 def add_all_words(game_word_list):
 	# sets & appends to words.
-	# requires game_words to be in a list, in '(word)' format
+	# requires game words to be in a list, in '(word)' format
 	prior_word_list = get_list('words')
 	for word in game_word_list:
 		word_word = 'word_%s'%word
@@ -95,23 +97,24 @@ def add_all_points(user):
 	else:
 		r_server.rpush('points', user_name_pts)
 
-def add_all_sentences(pos):
+def add_all_sentences(pos_list):
 	# sets & appends to sentences
 	# pos must be list, in '(POS)' format
 	prior_sent_list = get_list('sentences')
-	sent_pos_tag = 'sent_%s_tag'%pos
-	if sent_pos_tag in prior_sent_list:
-		pass
-	else:
-		r_server.rpush('sentences', sent_pos_tag)
+	for pos in pos_list:
+		sent_pos_tag = 'sent_%s_tag'%pos
+		if sent_pos_tag in prior_sent_list:
+			pass
+		else:
+			r_server.rpush('sentences', sent_pos_tag)
 
-def add_word_tweets(word, tweet_list):
+def add_word_tweets(word, tweets):
 	# sets & appends to word_(word)_tweets
-	# tweet(s) must be in a list, in '(tweet)' format
+	# tweets must be list, in '(tweet)' format
 	# word must be string
 	word_word_tweets = "word_%s_tweets"%word
 	prior_tweet_list = get_list(word_word_tweets)
-	for tweet in tweet_list:
+	for tweet in tweets:
 		if tweet in prior_tweet_list:
 			pass
 		else:
@@ -203,6 +206,13 @@ def set_num_tweets_final_tag_pos(word, pos):
 	tweet_tag_word_word_tag_pos = 'tweet_tag_word_%s_tag_%s'%(word, pos)
 	num_tweets = get_num_list(tweet_tag_word_word_tag_pos)
 	r_server.set(final_tag_word_word_tag_pos, num_tweets)
+
+def set_game_words_tweets(word_list, tweet):
+	add_all_words(word_list)
+	for word in word_list:
+		set_word(word)
+		add_word_tweets(word, tweet)
+	print "success"
 
 def main():
     pass
