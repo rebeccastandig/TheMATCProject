@@ -9,7 +9,6 @@ class Streamer(TwythonStreamer):
             # this returns each tweet as a list
             parse_tweets.delay(tweet)
         
-
     def on_error(self, status_code, data):
         print status_code
 	
