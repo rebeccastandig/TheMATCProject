@@ -7,7 +7,7 @@ There's two parts to The MATC Project: Tres Tigres, and The TwitUrban Dictionary
 
 
 ##General Information
-Tres Tigres is the crowdsourcing game that manually annotates the linguistic data.
+####Tres Tigres is the crowdsourcing game that manually annotates the linguistic data.
 
 Tres Tigres collects all tweets in English from the sample Public stream via Twitter's streaming API (accessed using the Twython module in Python). Tres Tigres then checks each word in a tweet against the Wordnik corpus (which pulls from The American Heritage Dictionary, WordNet, Wiktionary, and a variety of other sources). 
 
@@ -15,6 +15,8 @@ If a word isn't in the Wordnik corpus (and isn't a user name, emoticon, et ceter
 
 Once a word has been tagged with a part of speech through Tres Tigres, it goes into The TwitUrban Dictionary.
 
-The TwitUrban Dictionary is a manually annotated corpus of the words pulled from Twitter. It is constantly updating, and it is available for download free of charge. You can also browse it online.
+####The TwitUrban Dictionary is a manually annotated corpus of the words pulled from Twitter. 
+
+It is constantly updating, and it is available for download free of charge. You can also browse it online.
 
 
