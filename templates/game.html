@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block body %}
+<h2>Tres Tigres</h2>
+<p><form method="post">
+	{% for %}
+ 	<!-- <p><input type="text" name="name" placeholder="User Name"></p>
+	<p> <input type="password" name="pw" placeholder="Password"></p>
+    <p><input type="submit" value="Sign In"></p> -->
+    {% endfor %}
+</form></p>
+<h3><a href="{{url_for('register')}}">Need to register for a new account?</a></h3>
+{% endblock %}
