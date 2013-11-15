@@ -15,7 +15,7 @@ If a word isn't in the Wordnik corpus (and isn't a user name, emoticon, et ceter
 
 Once a word has been tagged with a part of speech through Tres Tigres, it goes into The TwitUrban Dictionary.
 
-####The TwitUrban Dictionary is a manually annotated corpus of the words pulled from Twitter. 
+####The TwitUrban Dictionary is the manually annotated corpus of the words pulled from Twitter. 
 
 It is constantly updating, and it is available for download free of charge. You can also browse it online.
 
