@@ -1,5 +1,7 @@
 #Welcome to The Manually Annotated Twitter Corpus Project
-###The Manually Annotated Twitter Corpus Project (a.k.a. The MATC Project) is a crowdsourced part of speech tagging game that results in a corpus of words sourced from Twitter. The whole idea behind The MATC Project is to allow linguistic data to be annotated by people with little or no training in linguistics.
+###The Manually Annotated Twitter Corpus Project (a.k.a. The MATC Project) is a crowdsourced part of speech tagging game that results in a corpus of words sourced from Twitter. 
+
+The whole idea behind The MATC Project is to allow linguistic data to be annotated by people with little or no training in linguistics.
 
 There's two parts to The MATC Project: Tres Tigres, and The TwitUrban Dictionary.
 
