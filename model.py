@@ -22,6 +22,8 @@ def get_string_num(key):
 	# doesn't return anything if key hadn't been created prior to checking
 	return r_server.get(key)
 
+#### Basic Setting Values ####
+
 def set_word(word):
 	# sets word_(word)
 	# word must be string
@@ -59,6 +61,9 @@ def set_user_pw(user, pw):
 	password = md5_hash(pw)
 	r_server.set(user_name_pw, password)
 
+#### End Basic Setting Values ####
+
+#### Basic Setting & Appending ####
 
 def add_all_words(game_word_list):
 	# sets & appends to words.
@@ -219,6 +224,10 @@ def set_game_words_tweets(word_list, tweet):
 		add_word_tweets(word, tweet)
 	print "success"
 
+#### End Basic Setting & Appending ####
+
+#### Flask Uses ####
+
 def check_if_user(user):
 	# checks to see if user_(name) exists for user.
 	# returns True or False
@@ -247,6 +256,102 @@ def auth_login(user_name, pw):
 		if md5_hash(pw) == password:
 			authenticated = True
 	return authenticated
+
+def get_corpus_pos():
+	# sec 1 of corpus = list of words tagged w/pos
+	#  so it'll be a dictionary with the key == POS, value == list of words
+
+	corpus = {}
+	tag_list = get_list('tags')
+	for tag in tag_list:
+		key = 'tagged_words_%s'%tag
+		# returns ['word_(word)','word_(diff word)']
+		tagged_words = get_list(key)
+		# returns '(pos)' or '(diff pos)'
+		tag_name = get_string_num(tag)
+		word_list = []
+		if len(tagged_words) > 0:
+			for word_word in tagged_words:
+				# returns '(word)'
+				word = get_string_num(word_word)
+				word_list.append(word)
+			corpus[tag_name] = word_list
+	return corpus
+	
+
+def get_corpus_words():
+	# sec 2 of corpus = list of POS for words
+	# so it'll be a dict with the key == word, value == list of POS
+
+	corpus = {}
+	word_list = get_list('words')
+	for word_word in word_list:
+		key = 'final_tag_%s'%word_word
+		# returns ['tag_(pos)', 'tag_(diff pos)']
+		tag_list = get_list(key)
+		# returns '(word)'
+		word = get_string_num(word_word)
+		pos_list = []
+		if len(tag_list) > 0:
+			for tag_tag in tag_list:
+				# returns '(tag)'
+				tag = get_string_num(tag_tag)
+				pos_list.append(tag)
+			corpus[word] = pos_list
+	return corpus 
+
+def get_pos():
+	# returns list of tags ['NP', 'V', etc]
+	tag_list = get_list('tags')
+	tags = []
+	for tag in tag_list:
+		# returns ['word_(word)','word_(diff word)']
+		pos = get_string_num(tag)
+		tags.append(pos)
+	tags.sort()
+	return tags
+
+def get_words():
+	# returns list of words ['word', 'glvod', etc]
+	word_list = get_list('words')
+	words = []
+	for word_word in word_list:
+		key = 'final_tag_%s'%word_word
+		tag_list = get_list(key)
+		if len(tag_list) > 0:
+			word = get_string_num(word_word)
+			words.append(word)
+	words.sort()
+	return words
+
+def get_tags_by_word(word):
+	key = 'final_tag_word_%s'%word
+	# returns list of tags ['tag_NP', 'tag_V', etc]
+	tag_list = get_list(key)
+	tags = []
+	for tag_item in tag_list:
+		tag = get_string_num(tag_item)
+		tags.append(tag)
+	tags.sort()
+	return tags
+	
+def get_words_by_tag(tag):
+	key = 'tagged_words_tag_%s'%tag
+	# returns list of words ['word_gvold', 'word_blah', etc]
+	word_list = get_list(key)
+	words = []
+	for word_item in word_list:
+		word = get_string_num(word_item)
+		words.append(word)
+	words.sort()
+	return words
+
+
+
+
+#### End Flask Uses ####
+
+
 
 
 def main():
