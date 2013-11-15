@@ -32,10 +32,7 @@ venv
 
 #test_twython
 test_twython
+keys.py
 
 #templates
-static
-forms.py
-config.py
 Procfile
-views.py
