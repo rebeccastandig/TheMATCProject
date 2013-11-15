@@ -1,5 +1,6 @@
 import redis
 import hashlib
+import random
 
 r_server = redis.StrictRedis(host="localhost", port=6379, db=1)
 
@@ -36,13 +37,16 @@ def set_tag(pos):
 	tag_pos = 'tag_%s'%pos
 	r_server.set(tag_pos, pos)
 
-def set_sent_pos_tag(sentence, pos):
+def set_sent_pos_tag(pos, sentences):
 	# sets sent_(POS)_tag
-	# sentence & pos must be strings
+	# pos must be string
+	# sentence(s) must be list in ['sent', 'sent2'] format
 	sent_pos_tag = 'sent_%s_tag'%pos
 	tag_pos = 'tag_%s'%pos
-	r_server.rpush(sent_pos_tag, sentence)
 	r_server.rpush(sent_pos_tag, tag_pos)
+	for sentence in sentences:
+		r_server.rpush(sent_pos_tag, sentence)
+	
 
 def set_user(user):
 	# sets user_(name)
@@ -301,11 +305,11 @@ def get_corpus_words():
 	return corpus 
 
 def get_pos():
-	# returns list of tags ['NP', 'V', etc]
+	# returns list of tags ['tag_NP', 'tag_V', etc]
 	tag_list = get_list('tags')
 	tags = []
 	for tag in tag_list:
-		# returns ['word_(word)','word_(diff word)']
+		# returns ['(pos)','(pos)']
 		pos = get_string_num(tag)
 		tags.append(pos)
 	tags.sort()
@@ -345,6 +349,48 @@ def get_words_by_tag(tag):
 		words.append(word)
 	words.sort()
 	return words
+
+def get_words_tags_game():
+	# get sentences and tags assoc - done
+	# get random word from 'words', then get 'word'
+	# also get tweets associated with that word
+	# choose random tweet to return
+	# also return tweet list, just in case
+
+
+	# returns list of sentences ['sent_NP_tag', 'sent_V_tag', etc]
+	sentences = get_list('sentences')
+	# returns list of words ['word_glvod', 'word_cruls', etc]
+	words = get_list('words')
+	tag_sent_list = []
+	word_list = []
+	for tag in sentences:
+		# returns ['tag_(pos)', 'sent', 'sent2']
+		sent_pos_tag = get_list(tag) 
+		# tag_sent_list will look like [['tag_pos', 'sent', 'sent2'], ['tag_diff pos', 'sent', sent2]]
+		tag_sent_list.append(sent_pos_tag)
+	for word_word in words:
+		# returns '(word)'
+		word = get_string_num(word_word)
+		# word_list will look like ['word', 'diff word', etc]
+		word_list.append(word)
+
+	random_num = random.randint(0, (len(word_list)))
+	word_for_game = word_list[random_num]
+
+	word_word_tweets = 'word_%s_tweets'%word_for_game
+
+	tweet_list = get_list(word_word_tweets)
+	random_num_again = random.randint(0, len(tweet_list))
+	tweet_for_game = tweet_list[random_num_again]
+
+	return word_for_game, tweet_for_game, tweet_list
+
+def tag_word_game(word, pos, user, tweet):
+	# tags a word from the game with tag_POS
+
+
+	pass
 
 
 
