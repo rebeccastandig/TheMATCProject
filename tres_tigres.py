@@ -81,6 +81,22 @@ def logout():
 def about_tt():
 	return render_template('about.html')
 
+@app.route("/about/tt")
+def abt_tt():
+	return render_template('about_tt.html')
+
+@app.route("/about/matc")
+def abt_matc():
+	return render_template('about_matc.html')
+
+@app.route("/about/ttud")
+def abt_ttud():
+	return render_template('about_ttud.html')
+
+@app.route("/about/faqs")
+def abt_faqs():
+	return render_template('about_faqs.html')
+
 @app.route("/corpus")
 def corpus():
 	return render_template('corpus.html')
@@ -92,6 +108,13 @@ def contact_me():
 @app.route("/linguists")
 def linguist_info():
 	return render_template('info_for_linguists.html')
+@app.route("/guide")
+def guide():
+	return render_template('pos_guide.html')
+
+@app.route("/guide/download")
+def dl_guide():
+	return render_template('download_guide.html')
 
 #### End Basic Functionality ####
 
