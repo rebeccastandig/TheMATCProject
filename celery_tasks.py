@@ -30,7 +30,7 @@ def parse_tweets(tweet):
 	if len(final_words) > 0:
 		for word in final_words:
 			if word > 0:
-				# check Wordnik
+		 		# check Wordnik
 				results = wordnik_api.check_all(word)
 				if results != None:
 					# if Wordnik never returned a result > 0, put it into the game
