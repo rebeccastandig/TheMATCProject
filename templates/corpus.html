@@ -1,20 +1,20 @@
 {% extends 'base.html' %}
 {% block body %}
 <p>
-	<h1><i>The TwitUrban Dictionary</i></h1>
+	<h2><i>The TwitUrban Dictionary</i></h2>
 </p>
 <p>
-	<h2><a href="{{url_for('corpus_download')}}">If you want to download</a></h2>	
+	<h3><a href="{{url_for('corpus_download')}}">If you want to download</a></h3>	
 </p>
 <p>
-	<h2><a href="{{url_for('corpus_browse')}}">If you just want to browse</h2></a>
+	<h3><a href="{{url_for('corpus_browse')}}">If you just want to browse</h3></a>
 </p>
 <p>
-	<h2>If you want to see visualizations</h2>
-	<h3>Coming soon!</h3>
+	<h3>If you want to see visualizations</h3>
+	<h4>Coming soon!</h4>
 </p>
 <p>
-	<h2><a href="">Information on the part of speech tags</a></h2>
+	<h3><a href="{{url_for('guide')}}">Guide to the part of speech tags</a></h3>
 	<!-- section here that links to a description of the POS tags and their meanings, also make this downloadable  -->
 </p>
 {% endblock %}
