@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block body %}
+<p>
+	<h2>For Linguists (and Interested Non-Linguists)</h2>
+		<h3>How did you choose your POS tags?</h3>
+			<p>I slightly modified the tags found in <a href="http://www.ark.cs.cmu.edu/TweetNLP/gimpel+etal.acl11.pdf">this paper</a> from researchers at Carnegie Mellon University. In general, I chose to get rid of the tags in the paper that were described as 'Twitter/online-specific' and 'Miscellaneous'. I am interested in creating a corpus of text speak/neologisms that may not be annotated anywhere else (or available for free). Emoticons, punctuation, numerals, Twitter user handles*, et cetera, are not linguistically relevant for the purposes of <i>The TwitUrban Dictionary</i>.</p>
+
+			<p>If you have questions or comments about why I chose to only tag these certain parts of speech, please <a href="{{url_for('contact_me')}}">contact me.</a> For more information on the part of speech tags, please <a href="">see my guide</a>.</p>
+
+			<p>*Twitter user handles are user names; they show up as @(name) in tweets.</p>
+		<!-- make link open in new window? -->
+		<h3>I want to access <i>The TwitUrban Dictionary</i> in a different format.</h3>
+			<p>Please <a href="{{url_for('contact_me')}}">contact me</a> with any specific needs.</p>
+		<h3>Do you have something like this for other languages?</h3>
+			<p>Not currently. I'd love to, though. If you have linguistic expertise in another language and want to help design a MATC-type of project in that language with me, I'd love to <a href="{{url_for('contact_me')}}">hear from you!</a></p>
+</p>
+{% endblock %}

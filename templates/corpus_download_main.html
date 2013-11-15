@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block body %}
+<p>
+	<h2> You can download <i>The TwitUrban Dictionary</i> in two formats:</h2>
+</p>
+<p>
+	<h3>
+		<ul>
+			<li><a href="{{url_for("corpus_download_pos")}}">Organized by part of speech</a></li>
+			<!-- section here that links to a description of the POS tags and their meanings, also make this downloadable -->
+			<li><a href="{{url_for("corpus_download_words")}}">Organized by word</a></li>
+	</h3>
+</p>
+<p>
+	<h4>If you'd like to access <i>The TwitUrban Dictionary</i> in a different format, please <a href="{{url_for('contact_me')}}">contact me.</a>
+</p>
+{% endblock %}
+
+
+
+
+

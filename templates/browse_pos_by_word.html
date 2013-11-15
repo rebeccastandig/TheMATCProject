@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block body %}
+<p>
+	<h2>Part of Speech Tags for {{word}}</h2>
+</p>
+{% for tag in tag_list %}
+<p>
+	<h3><a href="/corpus/browse/pos/{{tag}}">{{tag}}</a></h3>
+</p>
+{% endfor %}
+{% endblock %}

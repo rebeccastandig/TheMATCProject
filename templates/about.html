@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block body %}
+<!-- put section here that links to diff parts of the page (about matc, about tt, about ttud, faqs, 4 lx) -->
+<p> 
+	<h2>About The Manually Annotated Twitter Corpus Project</h2>
+		<h3>What is The MATC Project?</h3>
+			<p>The Manually Annotated Twitter Corpus Project is a crowdsourced part of speech tagging game that results in a corpus of words sourced from Twitter.</p>
+			<h4>But what does that even <i>mean</i>?</h4>
+				<p>Basically, there's two parts to The MATC Project: <a href"">Tres Tigres</a>, and <a href=""><i>The TwitUrban Dictionary</i></a>.</p>
+			<!-- tt and ttud -->
+</p>
+<p>
+	<h2>About Tres Tigres</h2>
+		<h3>What is Tres Tigres?</h3>
+			<p>Tres Tigres is a crowdsourced part of speech tagging game.</p>
+			<!-- talk about madlibs etc -->
+		<h3>How do I play?</h3>
+			<p></p>
+			<!-- first you have to register (link) -->
+			<!-- after registering, sign in -->
+			<!-- then you can begin playing -->
+		<h3>Do I need linguistic training to play?</h3>
+			<p>Nope! The whole idea behind The Manually Annotated Twitter Corpus Project is to allow linguistic data to be annotated by people with little or no training in linguistics. You don't need to know anything about morphemes or syntax; you just need to be a fluent or native speaker of English who enjoys MadLibs!</p>
+			<!-- add tm for madlibs, etc -->
+		<h3>Why the name 'Tres Tigres'?</h3>
+			<p></p>
+
+</p>
+<p>
+	<h2>About <i>The TwitUrban Dictionary</i></h2>
+		<h3>What is <i>The TwitUrban Dictionary</i>?</h3>
+			<p><i>The TwitUrban Dictionary</i> is a crowdsourced, manually annotated corpus of words pulled from Twitter. It is constantly updating.</p>
+			<!-- want to be able to do stuff with my text here :( -->
+			<p>You can <a href="{{url_for('corpus_browse')}}">browse</a> <i>The TwitUrban Dictionary</i> online, or you can <a href="{{url_for('corpus_download')}}">download</a> it onto your own computer.</p>
+		<h3>Do I need to sign up or pay to download it?</h3>
+			<p>No. You don't need an account to access <i>The TwitUrban Dictionary</i>. Anyone can download <i>The TwitUrban Dictionary</i>, free of cost.</p>
+</p>
+<p>
+	<h2>Other Frequently Asked Questions</h2>
+		<h3>How do I register?</h3>
+			<p>Registration is simple! Just <a href="{{url_for('register')}}">click here.</a></p>
+		<h3>I lost my password. What should I do?</h3>
+			<p></p>
+		<!-- link to retrieve pw? -->
+		<!-- link to reset pw -->
+		<h3>How do I reset my password?</h3>
+			<p></p>
+		<!-- link to reset pw -->
+		<h3>Who created The MATC Project?</h3>
+			<p>My name is <a href="http://twitter.com/understandig">Rebecca Standig.</a> I created The MATC Project as part of my studies at <a href="http://www.hackbrightacademy.com">Hackbright Academy.</a></p>
+			<!-- make link open in another window -->
+
+			<p>For more information on who I am or why I did this (or to hire me!), please <a href="{{url_for('contact_me')}}">contact me.</a></p>
+		<h3>Can I look at the code for all of this?</h3>
+			<p>Sure! All of the code for The MATC Project is available on my <a href="https://github.com/rebeccastandig/TresTigres">GitHub</a>.</p>
+		<h3>I'm a linguist/I have linguistics-related questions about The MATC Project.</h3>
+			<p>Great! Please go to the <a href="{{url_for('linguist_info')}}">Information for Linguists</a> section.</p>
+</p>
+{% endblock %}
+
+
+
+

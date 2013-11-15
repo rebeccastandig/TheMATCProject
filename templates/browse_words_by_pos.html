@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block body %}
+<p>
+	<h2>Words tagged as {{tag}}</h2>
+</p>
+{% for word in word_list %}
+<p>
+	<h3><a href="/corpus/browse/words/{{word}}">{{word}}</a></h3>
+</p>
+{% endfor %}
+{% endblock %}
