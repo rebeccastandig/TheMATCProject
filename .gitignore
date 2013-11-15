@@ -35,7 +35,6 @@ test_twython
 
 #templates
 static
-templates
 forms.py
 config.py
 Procfile
