@@ -10,9 +10,9 @@
 				"{{tweet}}"
 			</p>
 		</div>
-		<p>Which sentence below does <b>"{{word}}"</b> fit into? 
+		<p>Which sentence below does <b>"{{word}}"</b> fit into the best? 
 			<button class="new_tweet" id="new_tweet">
-				Show me another tweet with '{{word}}' in it.
+				Show me one more tweet with '{{word}}' in it.
 			</button>
 		</p>
 		{% for tag_sent in tags_sentences %}
@@ -40,8 +40,9 @@
 		$('button.new_tweet').click(function(){
 			var word = "{{word}}";
 			var tweet = "{{tweet}}";
-			$.post("/game", {"word": word, "tweet": tweet}, function(responseFromServer){
+			$.post("/game/more_tweets", {"word": word, "tweet": tweet}, function(responseFromServer){
 				console.log(responseFromServer);
+				$('#tweets').append(responseFromServer);
 			});
 		});
 	});
