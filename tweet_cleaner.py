@@ -165,7 +165,7 @@ def check_non_words(word):
 
 def check_emoticons(word):
 	if word != 0:
-		emoticons = [':-D', ':-)', ':-(', ':-P', ';-D', ';-P', ':\'-(', ':\'(', '-_-', '>_>', 'o.o', 'O.o', '0.o', 'O.O', '0.0', 'o.O', 'o.0']
+		emoticons = [':-D', ':-)', ':-(', ':-P', ';-D', ';-P', ':\'-(', ':\'(', '-_-', '>_>', 'o.o', 'O.o', '0.o', 'O.O', '0.0', 'o.O', 'o.0', 'o_o', 'O_o', '0_o', 'O_O', '0_0', 'o_O', 'o_0']
 		if word in emoticons:
 			word = 0
 		if len(word) > 3:
