@@ -183,8 +183,6 @@ def game():
 	if not session:
 		return render_template('login_tt.html')
 	if session['user']:
-		# highlight the word in html
-		# radio menu for sentences
 		game_info = model.get_words_tweets_game()
 		word_for_game = game_info[0]
 		tweet_for_game = game_info[1]
@@ -205,13 +203,11 @@ def game():
 				pass
 		pos_sents_tags = model.break_pos_sents(model.get_pos_sentences())
 
-
 		return render_template('game.html', word = word_for_game, tweet = tweet_for_game, tags_sentences = pos_sents_tags)
 	
 
 @app.route("/game", methods=['POST'])
 def play_game():
-	# need_tweet = request.form.get('tag')
 	tag = request.form.get('tag')
 	word = request.form.get('word')
 	tweet = request.form.get('tweet')
@@ -219,27 +215,36 @@ def play_game():
 	if tag and word:
 		model.tag_word_game(word, tag, user, tweet)
 		return "Tagged"
-	elif tweet and word:
-		tweet_list = model.get_another_tweet(word, tweet)
-		random_index = random.randint(0, len(tweet_list)-1)
-		new_tweet = tweet_list[random_index]
-		# fix this tomorrow when you've slept at all
 
-		if new_tweet == tweet:
-			if len(tweet_list) == 1:
+
+@app.route("/game/more_tweets", methods=['POST'])
+def new_tweet():
+	word = request.form.get('word')
+	tweet = request.form.get('tweet')
+	tweet_list = model.get_another_tweet(word, tweet)
+	if tweet_list:
+		if len(tweet_list) > 1:
+			new_tweet = tweet_list.pop()
+			if new_tweet == tweet:
 				return "There are no more tweets with %s in them."%word
-			elif random_index+1 <= len(tweet_list)-1:
-				new_tweet = tweet_list[random_index+1]
-				return new_tweet
 			else:
-				new_tweet = tweet_list[random_index-1]
-				return new_tweet	
-	else:
-		return new_tweet
+				try:
+					unicode(new_tweet, 'ascii')
+				except UnicodeError:
+					new_tweet = unicode(new_tweet, 'utf-8')
+				return render_template('moretweets.html', tweet=new_tweet)
+		else:
+			return "There are no more tweets with %s in them."%word
 
-@app.route("/game/more_tweets")
-def more_tweets(new_tweet):
-	return render_template('moretweets.html', new_tweet=new_tweet)
+	else:
+		return "There are no more tweets with %s in them."%word
+
+
+
+
+@app.route("/game/more_tweets/new")
+def more_tweets(tweet):
+	return render_template('moretweets.html', tweet=tweet)
 
 
 
