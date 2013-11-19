@@ -1,3 +1,6 @@
+#!/usr/bin/python
+# -*- coding: <utf-8> -*-
+
 import twython_streaming
 from celery_tasks import parse_tweets
 
@@ -7,6 +10,7 @@ APP_SECRET = 'secret'
 
 OAUTH_TOKEN = 'secret'
 OAUTH_TOKEN_SECRET = 'secret'
+
 
 stream = twython_streaming.Streamer(APP_KEY, APP_SECRET, OAUTH_TOKEN, OAUTH_TOKEN_SECRET)
 

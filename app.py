@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, flash, redirect, url_for, session
 import model
+import random
 
 app = Flask(__name__)
 app.secret_key ='secret'
@@ -177,19 +178,70 @@ def corpus_word(word):
 
 #### Game Functionality ####
 
-@app.route("/tres_tigres")
+@app.route("/game")
 def game():
 	if not session:
 		return render_template('login_tt.html')
 	if session['user']:
 		# highlight the word in html
 		# radio menu for sentences
-		return render_template('game.html')
+		game_info = model.get_words_tweets_game()
+		word_for_game = game_info[0]
+		tweet_for_game = game_info[1]
+		tweet_list = game_info[2]
+		try:
+			unicode(tweet_for_game, 'ascii')
+		except UnicodeError:
+			tweet_for_game = unicode(tweet_for_game, 'utf-8')
+		else:
+			pass
+
+		for tweet in tweet_list:
+			try:
+				unicode(tweet, 'ascii')
+			except UnicodeError:
+				tweet = unicode(tweet, 'utf-8')
+			else:
+				pass
+		pos_sents_tags = model.break_pos_sents(model.get_pos_sentences())
+
+
+		return render_template('game.html', word = word_for_game, tweet = tweet_for_game, tags_sentences = pos_sents_tags)
 	
 
-@app.route("/tres_tigres", methods=['POST'])
+@app.route("/game", methods=['POST'])
 def play_game():
-	return redirect(url_for('game'))
+	# need_tweet = request.form.get('tag')
+	tag = request.form.get('tag')
+	word = request.form.get('word')
+	tweet = request.form.get('tweet')
+	user = session['user']
+	if tag and word:
+		model.tag_word_game(word, tag, user, tweet)
+		return "Tagged"
+	elif tweet and word:
+		tweet_list = model.get_another_tweet(word, tweet)
+		random_index = random.randint(0, len(tweet_list)-1)
+		new_tweet = tweet_list[random_index]
+		# fix this tomorrow when you've slept at all
+
+		if new_tweet == tweet:
+			if len(tweet_list) == 1:
+				return "There are no more tweets with %s in them."%word
+			elif random_index+1 <= len(tweet_list)-1:
+				new_tweet = tweet_list[random_index+1]
+				return new_tweet
+			else:
+				new_tweet = tweet_list[random_index-1]
+				return new_tweet	
+	else:
+		return new_tweet
+
+@app.route("/game/more_tweets")
+def more_tweets(new_tweet):
+	return render_template('moretweets.html', new_tweet=new_tweet)
+
+
 
 #### End Game Functionality ####
 

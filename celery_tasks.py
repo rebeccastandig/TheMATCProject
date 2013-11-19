@@ -1,3 +1,6 @@
+#!/usr/bin/python
+# -*- coding: <utf-8> -*-
+
 from celery import Celery
 import model
 import wordnik_api

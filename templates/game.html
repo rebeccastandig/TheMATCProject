@@ -1,12 +1,49 @@
 {% extends "base.html" %}
 {% block body %}
 <h2>Tres Tigres</h2>
-<p><form method="post">
-	{% for %}
- 	<!-- <p><input type="text" name="name" placeholder="User Name"></p>
-	<p> <input type="password" name="pw" placeholder="Password"></p>
-    <p><input type="submit" value="Sign In"></p> -->
-    {% endfor %}
-</form></p>
-<h3><a href="{{url_for('register')}}">Need to register for a new account?</a></h3>
+	<p>
+		<p>
+			For the word <b>"{{word}}"</b> in this tweet:
+		</p>
+		<div id="tweets">
+			<p class="emoji">
+				"{{tweet}}"
+			</p>
+		</div>
+		<p>Which sentence below does <b>"{{word}}"</b> fit into? 
+			<button class="new_tweet" id="new_tweet">
+				Show me another tweet with '{{word}}' in it.
+			</button>
+		</p>
+		{% for tag_sent in tags_sentences %}
+			<p>
+				<button class="game" id="{{tag_sent[0]}}" value="{{tag_sent[1]}}">
+					{{tag_sent[1]}}
+				</button> ({{tag_sent[0]}})
+			</p>
+		{% endfor %}
+	</p>
+{% endblock %}
+
+
+{% block javascript %}
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('button.game').click(function(){
+			var tag = $(this).attr('id');
+			var word = "{{word}}";
+			$.post("/game", {"tag": tag, "word": word}, function(responseFromServer){
+				console.log(responseFromServer);
+			});
+
+		});
+		$('button.new_tweet').click(function(){
+			var word = "{{word}}";
+			var tweet = "{{tweet}}";
+			$.post("/game", {"word": word, "tweet": tweet}, function(responseFromServer){
+				console.log(responseFromServer);
+			});
+		});
+	});
+</script>
 {% endblock %}

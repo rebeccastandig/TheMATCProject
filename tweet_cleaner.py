@@ -1,3 +1,6 @@
+#!/usr/bin/python
+# -*- coding: <utf-8> -*-
+
 def clean_tweet(tweet_after_split):
 	return split_slashes(split_commas(split_sgl_qt(split_dbl_qt(split_ques(split_excl(split_periods(tweet_after_split)))))))
 
@@ -192,9 +195,6 @@ def check_mult_lett(word):
 	if word != 0:
 		length = 0
 		while length < len(word)-2:
-			# blahhh
-			# blaaaah
-			# bbbllah
 			if word[length] == word[length+1] and word[length] == word[length+2]:
 				word = 0
 				break

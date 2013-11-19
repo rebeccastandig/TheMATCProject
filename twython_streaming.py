@@ -1,3 +1,6 @@
+#!/usr/bin/python
+# -*- coding: <utf-8> -*-
+
 from twython import TwythonStreamer
 from celery_tasks import parse_tweets
 

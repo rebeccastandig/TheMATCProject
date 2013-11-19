@@ -222,6 +222,7 @@ def set_num_tweets_final_tag_pos(word, pos):
 	r_server.set(final_tag_word_word_tag_pos, num_tweets)
 
 def set_game_words_tweets(word_list, tweet):
+	# ***need to check to make sure no words are '(pos)_tweets' or anything like that before adding to word list.***
 	add_all_words(word_list)
 	for word in word_list:
 		set_word(word)
@@ -350,52 +351,97 @@ def get_words_by_tag(tag):
 	words.sort()
 	return words
 
-def get_words_tags_game():
+#### Game Functions ####
+
+def get_words_tweets_game():
 	# get sentences and tags assoc - done
 	# get random word from 'words', then get 'word'
 	# also get tweets associated with that word
 	# choose random tweet to return
 	# also return tweet list, just in case
 
-
-	# returns list of sentences ['sent_NP_tag', 'sent_V_tag', etc]
-	sentences = get_list('sentences')
 	# returns list of words ['word_glvod', 'word_cruls', etc]
 	words = get_list('words')
-	tag_sent_list = []
 	word_list = []
-	for tag in sentences:
-		# returns ['tag_(pos)', 'sent', 'sent2']
-		sent_pos_tag = get_list(tag) 
-		# tag_sent_list will look like [['tag_pos', 'sent', 'sent2'], ['tag_diff pos', 'sent', sent2]]
-		tag_sent_list.append(sent_pos_tag)
 	for word_word in words:
 		# returns '(word)'
 		word = get_string_num(word_word)
 		# word_list will look like ['word', 'diff word', etc]
 		word_list.append(word)
 
-	random_num = random.randint(0, (len(word_list)))
+	random_num = random.randint(0, (len(word_list)-1))
 	word_for_game = word_list[random_num]
 
 	word_word_tweets = 'word_%s_tweets'%word_for_game
 
 	tweet_list = get_list(word_word_tweets)
-	random_num_again = random.randint(0, len(tweet_list))
+	random_num_again = random.randint(0, len(tweet_list)-1)
 	tweet_for_game = tweet_list[random_num_again]
 
 	return word_for_game, tweet_for_game, tweet_list
 
+def get_pos_sentences():
+	sentences = get_list('sentences')
+	list_of_sents = []
+	for sent_pos_tag in sentences:
+		tag_and_sentences = get_list(sent_pos_tag)
+		list_of_sents.append(tag_and_sentences)
+
+	# list_of_sents looks like [['tag_(POS)', "sent 1", "sent2"], ['tag_(diff POS)', 'sent1', 'sent2']]
+	return list_of_sents
+
+def break_pos_sents(list_of_sents):
+	pos_sentences = []
+	for pos in range(len(list_of_sents)):
+		random_index = random.randint(1, len(list_of_sents[pos][1:])-1)
+		sentence = list_of_sents[pos][random_index]
+		tag = list_of_sents[pos][0]
+		pos_sentences.append((tag, sentence))
+	return pos_sentences
+
+
+def get_another_tweet(word, tweet):
+	# word and tweet must string
+	word_word_tweets = 'word_%s_tweets'%word
+	tweet_list = get_list(word_word_tweets)
+	return tweet_list
+
+
 def tag_word_game(word, pos, user, tweet):
+	# pos comes in as tag_(POS)
 	# tags a word from the game with tag_POS
 
+	# user_(name)_tag_word_(word)
+	add_user_tag_word(user, word, pos)
+
+	# tag_word_(word)_tag_(POS)
+	add_tag_word_tag_pos(word, pos, user)
+
+	# tweet_tag_word_(word)_tag_(POS)
+	add_tweet_tag_word_tag_pos(word, pos, [tweet])
+
+	# user_(name)_words_tagged
+	tag_word_tag_pos = 'tag_word_%s_%s'%(word, pos)
+	add_user_words_tagged(user, [tag_word_tag_pos])
+
+
+def add_pts_game(word, pos, user):
+	# adds 10 pts to every user once tag verified 5x
+	# adds 5 pts to every new user who continues to verify tag thereafter
 
 	pass
 
+def verified_tag():
+	# affected keys:
+	# tagged_words_tag_(POS)
+	# final_tag_word_(word)
+	# there are more
+	pass
 
-
+#### End Game Functions ####
 
 #### End Flask Uses ####
+
 
 
 
