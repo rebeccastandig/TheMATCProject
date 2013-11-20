@@ -36,7 +36,6 @@ def new_user():
 			flash('Invalid user name. User name must be between 6 and 15 characters.')
 			return redirect(url_for('register'))
 		elif 6 > len(pw) or 15 < len(pw):
-			# add this for user name too
 			flash('Invalid password. Password must be between 6 and 15 characters.')
 			return redirect(url_for('register'))
 		elif pw != verify_pw:
@@ -74,6 +73,9 @@ def sign_in():
 					flash('Sign in successful!')
 					session['user'] = name
 					return redirect(url_for('index'))
+				else:
+					flash('Your user name and/or password didn\'t match our records. Please try signing in again.')
+					return redirect(url_for('signin'))
 	else:
 		flash('Your user name and/or password didn\'t match our records. Please try signing in again.')
 		return redirect(url_for('signin'))
@@ -187,6 +189,9 @@ def game():
 		word_for_game = game_info[0]
 		tweet_for_game = game_info[1]
 		tweet_list = game_info[2]
+		user = session['user']
+		user_name_pts = "user_%s_pts"%user
+		user_points = model.get_string_num(user_name_pts)
 		try:
 			unicode(tweet_for_game, 'ascii')
 		except UnicodeError:
@@ -203,7 +208,7 @@ def game():
 				pass
 		pos_sents_tags = model.break_pos_sents(model.get_pos_sentences())
 
-		return render_template('game.html', word = word_for_game, tweet = tweet_for_game, tags_sentences = pos_sents_tags)
+		return render_template('game.html', word = word_for_game, tweet = tweet_for_game, tags_sentences = pos_sents_tags, user_points=user_points)
 	
 
 @app.route("/game", methods=['POST'])
@@ -213,8 +218,15 @@ def play_game():
 	tweet = request.form.get('tweet')
 	user = session['user']
 	if tag and word:
+		# set the tag for the user and the tweet
 		model.tag_word_game(word, tag, user, tweet)
-		return "Tagged"
+		# add points and set final tag if needed
+		model.add_pts_game(word, tag, user)
+		# retrieve how many points user has
+		user_name_pts = "user_%s_pts"%user
+		num_points = model.get_string_num(user_name_pts)
+		return str(num_points)
+		# return redirect(url_for('game'))
 
 
 @app.route("/game/more_tweets", methods=['POST'])
@@ -234,11 +246,12 @@ def new_tweet():
 					new_tweet = unicode(new_tweet, 'utf-8')
 				return render_template('moretweets.html', tweet=new_tweet)
 		else:
-			return "There are no more tweets with %s in them."%word
+			new_tweet = "There are no more tweets with %s in them."%word
+			return render_template('moretweets.html', tweet=new_tweet)
 
 	else:
-		return "There are no more tweets with %s in them."%word
-
+		new_tweet = "There are no more tweets with %s in them."%word
+		return render_template('moretweets.html', tweet=new_tweet)
 
 
 
@@ -246,6 +259,17 @@ def new_tweet():
 def more_tweets(tweet):
 	return render_template('moretweets.html', tweet=tweet)
 
+@app.route("/game/points")
+def show_points():
+	if not session:
+		scores = model.get_top_scores()
+		return render_template("top_points.html", user_list = scores[0], points = scores[1] )
+	if session['user']:
+		user = session['user']
+		scores = model.get_top_scores()
+		user_name_pts = "user_%s_pts"%user
+		user_score = model.get_string_num(user_name_pts)
+		return render_template("user_and_top_points.html", user_list=scores[0], points=scores[1], user_score=user_score, user_name=user)
 
 
 #### End Game Functionality ####
