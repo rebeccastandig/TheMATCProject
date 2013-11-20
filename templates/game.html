@@ -3,6 +3,11 @@
 <h2>Tres Tigres</h2>
 	<p>
 		<p>
+			<div>
+			<h4>You have <span id="points">{{user_points}}</span> points.</h4>
+		</div>
+		</p>
+		<p>
 			For the word <b>"{{word}}"</b> in this tweet:
 		</p>
 		<div id="tweets">
@@ -12,7 +17,7 @@
 		</div>
 		<p>Which sentence below does <b>"{{word}}"</b> fit into the best? 
 			<button class="new_tweet" id="new_tweet">
-				Show me one more tweet with '{{word}}' in it.
+				Show me another tweet with '{{word}}' in it.
 			</button>
 		</p>
 		{% for tag_sent in tags_sentences %}
@@ -34,6 +39,8 @@
 			var word = "{{word}}";
 			$.post("/game", {"tag": tag, "word": word}, function(responseFromServer){
 				console.log(responseFromServer);
+				// what i'd like to do is just return the new page.
+				$("#points").html(responseFromServer)
 			});
 
 		});
@@ -42,6 +49,7 @@
 			var tweet = "{{tweet}}";
 			$.post("/game/more_tweets", {"word": word, "tweet": tweet}, function(responseFromServer){
 				console.log(responseFromServer);
+				// how can i do this for more than 1 click on a page?
 				$('#tweets').append(responseFromServer);
 			});
 		});
