@@ -57,6 +57,9 @@ def set_user(user):
 	r_server.rpush(user_name, user)
 	r_server.rpush(user_name, user_name_pw)
 	r_server.rpush(user_name, user_name_pts)
+	r_server.incrby(user_name_pts, 0)
+	add_all_users(user)
+	add_all_points(user)
 
 def set_user_pw(user, pw):
 	# sets user_(name)_pw
@@ -134,11 +137,10 @@ def add_word_tweets(word, tweets):
 		else:
 			r_server.rpush(word_word_tweets, tweet)
 
-def add_user_pts(user, pts):
+def add_user_pts(user_name_pts, pts):
 	# sets & adds user_(name)_pts
-	# user must be string
+	# user must be string 'user_(name)_pts'
 	# pts must be number, can be negative to decrease
-	user_name_pts = 'user_%s_pts'%user
 	r_server.incrby(user_name_pts, pts)
 	# leaving pts open so i can write diff function that will discriminate when to add 10 vs 5
 
@@ -255,12 +257,16 @@ def check_alphanum(string):
 def auth_login(user_name, pw):
 	name_key = 'user_%s'%user_name
 	user_info = get_list(name_key)
-	password = get_string_num(user_info[1])
+	
 	authenticated = False
-	if user_name == user_info[0]:
-		if md5_hash(pw) == password:
-			authenticated = True
-	return authenticated
+	if user_info:
+		if user_name == user_info[0]:
+			password = get_string_num(user_info[1])
+			if md5_hash(pw) == password:
+				authenticated = True
+				return authenticated
+	else:
+		return authenticated
 
 def get_corpus_pos():
 	# sec 1 of corpus = list of words tagged w/pos
@@ -426,17 +432,54 @@ def tag_word_game(word, pos, user, tweet):
 
 
 def add_pts_game(word, pos, user):
+	# word, pos, and user must be strings
 	# adds 10 pts to every user once tag verified 5x
 	# adds 5 pts to every new user who continues to verify tag thereafter
+	# also adds words to their final tags if verified
 
-	pass
+	
+	tag_word_word_tag_pos = "tag_word_%s_tag_%s"%(word, pos)
+	users_tagged_as_pos = get_list(tag_word_word_tag_pos)
+	if len(users_tagged_as_pos) == 5:
+		# give each user 10 pts
+		for user_name in users_tagged_as_pos:
+			user_name_pts = "user_%s_pts"%user_name
+			add_user_pts(user_name_pts, 10)
+		word_word = "word_%s"%word
+		word_list = [word_word]
+		tag_tag = "tag_%s"%pos
+		tag_list = [tag_tag]
+		add_tagged_words_pos(pos, word_list)
+		add_final_tag(word, tag_list)
 
-def verified_tag():
-	# affected keys:
-	# tagged_words_tag_(POS)
-	# final_tag_word_(word)
-	# there are more
-	pass
+	elif len(users_tagged_as_pos) > 5:
+		# give each user 5 pts
+		for user_name in users_tagged_as_pos:
+			user_name_pts = "user_%s_pts"%user_name
+			add_user_pts(user_name_pts, 5)
+	else:
+		# don't give them any points if not verified yet
+		pass
+
+def get_top_scores():
+	# get list of points 
+	# for each one check the score
+
+	points_list = get_list('points')
+	length = 0
+	top_users = []
+	top_scores = []
+	fake_list = []
+	while length < 2:
+		for user_name_pts in points_list:
+			their_pts = get_string_num(user_name_pts)
+			top_users.append(user_name_pts)
+			top_scores.append(their_pts)
+			fake_list.append((user_name_pts, their_pts))
+			length += 1
+
+	return top_users, top_scores
+
 
 #### End Game Functions ####
 
