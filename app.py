@@ -131,6 +131,8 @@ def dl_guide():
 
 ## None of these will work until people tag in the game ##
 
+# check if i need to redo any of these fns since i re-ordered pos tag thing?
+
 @app.route("/corpus/download")
 def corpus_download():
 	return render_template('corpus_download_main.html')
@@ -207,8 +209,10 @@ def game():
 			else:
 				pass
 		pos_sents_tags = model.break_pos_sents(model.get_pos_sentences())
+		first_half = pos_sents_tags[:len(pos_sents_tags)/2]
+		second_half = pos_sents_tags[len(pos_sents_tags)/2:]
 
-		return render_template('game.html', word = word_for_game, tweet = tweet_for_game, tags_sentences = pos_sents_tags, user_points=user_points)
+		return render_template('game.html', word = word_for_game, tweet = tweet_for_game, user_points=user_points, tweet_list=tweet_list, first_half=first_half, second_half=second_half)
 	
 
 @app.route("/game", methods=['POST'])
@@ -226,19 +230,18 @@ def play_game():
 		user_name_pts = "user_%s_pts"%user
 		num_points = model.get_string_num(user_name_pts)
 		return str(num_points)
-		# return redirect(url_for('game'))
-
 
 @app.route("/game/more_tweets", methods=['POST'])
 def new_tweet():
 	word = request.form.get('word')
 	tweet = request.form.get('tweet')
 	tweet_list = model.get_another_tweet(word, tweet)
-	if tweet_list:
-		if len(tweet_list) > 1:
-			new_tweet = tweet_list.pop()
+	tweets_gotten = request.form.get('tweets_gotten')
+	if tweets_gotten > 0:
+		if len(tweet_list) >= tweets_gotten:
+			new_tweet = tweet_list[-tweets_gotten]
 			if new_tweet == tweet:
-				return "There are no more tweets with %s in them."%word
+				return "There are no more tweets with \"%s\" in them."%word
 			else:
 				try:
 					unicode(new_tweet, 'ascii')
@@ -246,11 +249,10 @@ def new_tweet():
 					new_tweet = unicode(new_tweet, 'utf-8')
 				return render_template('moretweets.html', tweet=new_tweet)
 		else:
-			new_tweet = "There are no more tweets with %s in them."%word
+			new_tweet = "There are no more tweets with \"%s\" in them."%word
 			return render_template('moretweets.html', tweet=new_tweet)
-
 	else:
-		new_tweet = "There are no more tweets with %s in them."%word
+		new_tweet = "There are no more tweets with \"%s\" in them."%word
 		return render_template('moretweets.html', tweet=new_tweet)
 
 
@@ -263,13 +265,13 @@ def more_tweets(tweet):
 def show_points():
 	if not session:
 		scores = model.get_top_scores()
-		return render_template("top_points.html", user_list = scores[0], points = scores[1] )
+		return render_template("top_points.html", scores=scores )
 	if session['user']:
 		user = session['user']
 		scores = model.get_top_scores()
 		user_name_pts = "user_%s_pts"%user
 		user_score = model.get_string_num(user_name_pts)
-		return render_template("user_and_top_points.html", user_list=scores[0], points=scores[1], user_score=user_score, user_name=user)
+		return render_template("user_and_top_points.html", scores=scores, user_score=user_score, user_name=user)
 
 
 #### End Game Functionality ####
