@@ -462,28 +462,56 @@ def add_pts_game(word, pos, user):
 		pass
 
 def get_top_scores():
-	# get list of points 
-	# for each one check the score
+	# gets the top 25 scores, in order (highest to lowest)
 
 	points_list = get_list('points')
-	length = 0
-	top_users = []
-	top_scores = []
-	fake_list = []
-	while length < 2:
-		for user_name_pts in points_list:
-			their_pts = get_string_num(user_name_pts)
-			top_users.append(user_name_pts)
-			top_scores.append(their_pts)
-			fake_list.append((user_name_pts, their_pts))
-			length += 1
+	top_list = []
 
-	return top_users, top_scores
+	if len(points_list) > 25:
+		# create the first 25 points to compare all other points to
+		for user_name_pts in points_list[:25]:
+			their_pts = int(get_string_num(user_name_pts))
+			user_name = user_name_pts.rstrip('pts').lstrip('user').rstrip('_').lstrip('_')
+			top_list.append((their_pts, user_name))
+			
+		top_list.sort()
+		top_list.reverse()
+		# looking at the sorted list from highest to lowest
+		for user_name_pts in points_list[25:]:
+			their_pts = int(get_string_num(user_name_pts))
+			num_times_added = 0
+			for scores in top_list:
+				if their_pts > scores[0] and num_times_added == 0:
+					user_name = user_name_pts.rstrip('pts').lstrip('user').rstrip('_').lstrip('_')
+					if user_name != scores[1]:
+						top_list.append((their_pts, user_name))
+						num_times_added += 1
+						
+		top_list.sort()
+		top_list.reverse()
+
+		if len(top_list) > 25:
+			top_list = top_list[:25]
+			return top_list
+		else:
+			return top_list
+	else:
+		# if the len(points_list) <= 25
+		for user_name_pts in points_list:
+			their_pts = int(get_string_num(user_name_pts))
+			user_name = user_name_pts.rstrip('pts').lstrip('user').rstrip('_').lstrip('_')
+			top_list.append((their_pts, user_name))
+		top_list.sort()
+		top_list.reverse()
+		return top_list
 
 
 #### End Game Functions ####
 
 #### End Flask Uses ####
+
+
+
 
 
 
