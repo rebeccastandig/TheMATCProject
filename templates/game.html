@@ -1,4 +1,8 @@
 {% extends "base.html" %}
+{% block header %}
+<p><b>{{logged_in}}</b>
+	<a href="{{url_for('logout')}}">{{not_you}}</a></p>
+{% endblock %}
 {% block body %}
 <h2>Tres Tigres</h2>
 	<div id="scorebox">
@@ -26,7 +30,7 @@
 		{% for tag_sent in first_half %}
 		<button class="game" id="{{tag_sent[0]}}" value="{{tag_sent[1]}}">
 					{{tag_sent[1]}}
-			</button>
+		</button>
 		<br>
 		{% endfor %}
 		</td>
@@ -34,7 +38,7 @@
 		{% for tag_sent in second_half %}
 		<button class="game" id="{{tag_sent[0]}}" value="{{tag_sent[1]}}">
 					{{tag_sent[1]}}
-			</button>
+		</button>
 		<br>
 		{% endfor %}
 		</td>

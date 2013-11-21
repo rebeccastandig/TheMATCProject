@@ -8,8 +8,13 @@ app.secret_key ='secret'
 
 @app.route("/")
 def index():
-	# do something with session user in greeting
-	return render_template('index.html')
+	if not session:
+		return render_template('index.html')
+	else:
+		greeting = 'Hello %s!'%session['user']
+		logged_in = 'Logged in as %s.'%session['user']
+		not_you = 'Not %s?'%session['user']
+		return render_template('index.html', greeting=greeting, logged_in=logged_in, not_you=not_you)
 
 @app.route("/register", methods=['GET', 'POST'])
 def register():
@@ -75,7 +80,6 @@ def signin():
 				pw_is_alphanum = model.check_alphanum(pw)
 				if name_is_alphanum == True and pw_is_alphanum == True:
 					if model.auth_login(name, pw) == True:
-						flash('Sign in successful!')
 						session['user'] = name
 						ip_address = request.remote_addr
 						last_url = model.get_last_url(ip_address)
@@ -103,43 +107,93 @@ def logout():
 
 @app.route("/about")
 def about_tt():
-	return render_template('about.html')
+	if session:
+		logged_in = 'Logged in as %s.'%session['user']
+		not_you = 'Not %s?'%session['user']
+		return render_template('about.html', logged_in=logged_in, not_you=not_you)
+	else:
+		return render_template('about.html')
 
 @app.route("/about/tt")
 def abt_tt():
-	return render_template('about_tt.html')
+	if session:
+		logged_in = 'Logged in as %s.'%session['user']
+		not_you = 'Not %s?'%session['user']
+		return render_template('about_tt.html', logged_in=logged_in, not_you=not_you)
+	else:
+		return render_template('about_tt.html')
 
 @app.route("/about/matc")
 def abt_matc():
-	return render_template('about_matc.html')
+	if session:
+		logged_in = 'Logged in as %s.'%session['user']
+		not_you = 'Not %s?'%session['user']
+		return render_template('about_matc.html', logged_in=logged_in, not_you=not_you)
+	else:
+		return render_template('about_matc.html')
 
 @app.route("/about/ttud")
 def abt_ttud():
-	return render_template('about_ttud.html')
+	if session:
+		logged_in = 'Logged in as %s.'%session['user']
+		not_you = 'Not %s?'%session['user']
+		return render_template('about_ttud.html', logged_in=logged_in, not_you=not_you)
+	else:
+		return render_template('about_ttud.html')
 
 @app.route("/about/faqs")
 def abt_faqs():
-	return render_template('about_faqs.html')
+	if session:
+		logged_in = 'Logged in as %s.'%session['user']
+		not_you = 'Not %s?'%session['user']
+		return render_template('about_faqs.html', logged_in=logged_in, not_you=not_you)
+	else:
+		return render_template('about_faqs.html')
 
 @app.route("/corpus")
 def corpus():
-	return render_template('corpus.html')
+	if session:
+		logged_in = 'Logged in as %s.'%session['user']
+		not_you = 'Not %s?'%session['user']
+		return render_template('corpus.html', logged_in=logged_in, not_you=not_you)
+	else:
+		return render_template('corpus.html')
 
 @app.route("/contact")
 def contact_me():
-	return render_template('contact_me.html')
+	if session:
+		logged_in = 'Logged in as %s.'%session['user']
+		not_you = 'Not %s?'%session['user']
+		return render_template('contact_me.html', logged_in=logged_in, not_you=not_you)
+	else:
+		return render_template('contact_me.html')
 
 @app.route("/linguists")
 def linguist_info():
-	return render_template('info_for_linguists.html')
+	if session:
+		logged_in = 'Logged in as %s.'%session['user']
+		not_you = 'Not %s?'%session['user']
+		return render_template('info_for_linguists.html', logged_in=logged_in, not_you=not_you)
+	else:
+		return render_template('info_for_linguists.html')
 
 @app.route("/guide")
 def guide():
-	return render_template('pos_guide.html')
+	if session:
+		logged_in = 'Logged in as %s.'%session['user']
+		not_you = 'Not %s?'%session['user']
+		return render_template('pos_guide.html', logged_in=logged_in, not_you=not_you)
+	else:
+		return render_template('pos_guide.html')
 
 @app.route("/guide/download")
 def dl_guide():
-	return render_template('download_guide.html')
+	if session:
+		logged_in = 'Logged in as %s.'%session['user']
+		not_you = 'Not %s?'%session['user']
+		return render_template('download_guide.html', logged_in=logged_in, not_you=not_you)
+	else:
+		return render_template('download_guide.html')
 
 #### End Basic Functionality ####
 
@@ -151,47 +205,86 @@ def dl_guide():
 
 @app.route("/corpus/download")
 def corpus_download():
-	return render_template('corpus_download_main.html')
+	if session:
+		logged_in = 'Logged in as %s.'%session['user']
+		not_you = 'Not %s?'%session['user']
+		return render_template('corpus_download_main.html', logged_in=logged_in, not_you=not_you)
+	else:
+		return render_template('corpus_download_main.html')
 
 @app.route("/corpus/download/pos")
 def corpus_download_pos():
 	corpus = model.get_corpus_pos()
 	# need to be able to dl this
-	return render_template('corpus_download.html', corpus = corpus)
+	if session:
+		logged_in = 'Logged in as %s.'%session['user']
+		not_you = 'Not %s?'%session['user']
+		return render_template('corpus_download.html', logged_in=logged_in, corpus=corpus, not_you=not_you)
+	else:
+		return render_template('corpus_download.html', corpus = corpus)
 
 
 @app.route("/corpus/download/words")
 def corpus_download_words():
 	# need to be able to dl this
 	corpus = model.get_corpus_words()
-	return render_template('corpus_download.html', corpus = corpus)
+	if session:
+		logged_in = 'Logged in as %s.'%session['user']
+		not_you = 'Not %s?'%session['user']
+		return render_template('corpus_download.html', logged_in=logged_in, corpus=corpus, not_you=not_you)
+	else:
+		return render_template('corpus_download.html', corpus = corpus)
 
 @app.route("/corpus/browse")
 def corpus_browse():
 	# i'd like to add searching ability too
 	# for searching, they'd just have to search like 'word_whatever they're searching for' etc
-	return render_template('browse.html')
+	if session:
+		logged_in = 'Logged in as %s.'%session['user']
+		not_you = 'Not %s?'%session['user']
+		return render_template('browse.html', logged_in=logged_in, not_you=not_you)
+	else:
+		return render_template('browse.html')
 
 @app.route("/corpus/browse/pos")
 def corpus_pos_list():
 	tag_list = model.get_pos()
-	return render_template('browse_list_pos.html', corpus_list = tag_list)
+	if session:
+		logged_in = 'Logged in as %s.'%session['user']
+		not_you = 'Not %s?'%session['user']
+		return render_template('browse_list_pos.html', logged_in=logged_in, corpus_list=tag_list, not_you=not_you)
+	else:
+		return render_template('browse_list_pos.html', corpus_list=tag_list)
 	
 @app.route("/corpus/browse/words")
 def corpus_words_list():
 	word_list = model.get_words()
-	return render_template('browse_list_words.html', corpus_list = word_list)
+	if session:
+		logged_in = 'Logged in as %s.'%session['user']
+		not_you = 'Not %s?'%session['user']
+		return render_template('browse_list_words.html', logged_in=logged_in, corpus_list=word_list, not_you=not_you)
+	else:
+		return render_template('browse_list_words.html', corpus_list=word_list)
 
 @app.route("/corpus/browse/pos/<tag>")
 def corpus_pos(tag):
 	word_list = model.get_words_by_tag(tag)
-	return render_template('browse_words_by_pos.html', word_list = word_list, tag = tag)
-	pass
+	if session:
+		logged_in = 'Logged in as %s.'%session['user']
+		not_you = 'Not %s?'%session['user']
+		return render_template('browse_words_by_pos.html', logged_in=logged_in, word_list=word_list, tag=tag, not_you=not_you)
+	else:
+		return render_template('browse_words_by_pos.html', word_list=word_list, tag=tag)
 
 @app.route("/corpus/browse/words/<word>")
 def corpus_word(word):
 	tag_list = model.get_tags_by_word(word)
-	return render_template('browse_pos_by_word.html', tag_list = tag_list, word = word)
+	if session:
+		logged_in = 'Logged in as %s.'%session['user']
+		not_you = 'Not %s?'%session['user']
+		return render_template('browse_pos_by_word.html', logged_in=logged_in, tag_list=tag_list, word=word, not_you=not_you)
+	else:
+		return render_template('browse_pos_by_word.html', tag_list=tag_list, word=word)
 
 #### End Corpus Functionality ####
 
@@ -228,7 +321,10 @@ def game():
 		first_half = pos_sents_tags[:len(pos_sents_tags)/2]
 		second_half = pos_sents_tags[len(pos_sents_tags)/2:]
 
-		return render_template('game.html', word = word_for_game, tweet = tweet_for_game, user_points=user_points, tweet_list=tweet_list, first_half=first_half, second_half=second_half)
+		logged_in = 'Logged in as %s.'%user
+		not_you = 'Not %s?'%session['user']
+
+		return render_template('game.html', word = word_for_game, tweet = tweet_for_game, user_points=user_points, tweet_list=tweet_list, first_half=first_half, second_half=second_half, logged_in=logged_in, user=user, not_you=not_you)
 	
 
 @app.route("/game", methods=['POST'])
@@ -287,7 +383,9 @@ def show_points():
 		scores = model.get_top_scores()
 		user_name_pts = "user_%s_pts"%user
 		user_score = model.get_string_num(user_name_pts)
-		return render_template("user_and_top_points.html", scores=scores, user_score=user_score, user_name=user)
+		logged_in = 'Logged in as %s.'%user
+		not_you = 'Not %s?'%session['user']
+		return render_template("user_and_top_points.html", scores=scores, user_score=user_score, user=user, logged_in=logged_in, not_you=not_you)
 
 
 #### End Game Functionality ####

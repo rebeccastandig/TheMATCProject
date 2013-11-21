@@ -29,6 +29,11 @@
         <div class="container">
             <h1>The Manually Annotated Twitter Corpus Project</h1>
             <p>
+                {% block header %}
+                {% endblock %}
+            </p>
+            
+            <p>
                 <!-- have messages pop up in window? -->
             {% for message in get_flashed_messages() %}
             <h4>{{message}}</h4>

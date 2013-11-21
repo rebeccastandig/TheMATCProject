@@ -1,4 +1,8 @@
 {% extends 'base.html' %}
+{% block header %}
+<p><b>{{logged_in}}</b>
+	<a href="{{url_for('logout')}}">{{not_you}}</a></p>
+{% endblock %}
 {% block body %}
 <!-- put section here that links to diff parts of the page (about matc, about tt, about ttud, faqs, 4 lx) -->
 <p> 

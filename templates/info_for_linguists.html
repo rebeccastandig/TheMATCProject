@@ -1,4 +1,8 @@
 {% extends 'base.html' %}
+{% block header %}
+<p><b>{{logged_in}}</b>
+	<a href="{{url_for('logout')}}">{{not_you}}</a></p>
+{% endblock %}
 {% block body %}
 <p>
 	<h2>Information for Linguists (and Interested Non-Linguists)</h2>

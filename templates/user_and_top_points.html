@@ -1,4 +1,8 @@
 {% extends 'base.html' %}
+{% block header %}
+<p><b>{{logged_in}}</b>
+	<a href="{{url_for('logout')}}">{{not_you}}</a></p>
+{% endblock %}
 {% block body %}
 <div id="scorebox">
 <h3>Your score is {{user_score}}</h3><br>
@@ -12,13 +16,13 @@
 		<th><h3>Score</h3></th>
 	</tr>
 {% for score_user in scores %}
-	{% if score_user[1] == user_name %}
+	{% if score_user[1] == user %}
 	<tr align="center">
 		<td><b><i>{{score_user[1]}}</b></i></td>
 		<td><b><i>{{score_user[0]}}</b></i></td>
 	</tr>
 	{% endif %}
-	{% if score_user[1] != user_name %}
+	{% if score_user[1] != user %}
 	<tr align="center">
 		<td>{{score_user[1]}}</td> 
 		<td>{{score_user[0]}}</td>

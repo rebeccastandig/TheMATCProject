@@ -1,5 +1,10 @@
 {% extends 'base.html' %}
+{% block header %}
+<p><b>{{logged_in}}</b>
+	<a href="{{url_for('logout')}}">{{not_you}}</a></p>
+{% endblock %}
 {% block body %}
+<h2>{{greeting}}</h2>
 <h2>Welcome to The MATC Project!</h2>
 <h3>
 	Feel free to take a look around.<br>
