@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block body %}
+<div id="scorebox">
+<h3>Your score is {{user_score}}</h3><br>
+</div>
+<table border="4" width="50%" cellpadding="2">
+	<tr>
+		<th colspan="2"><h2>Top 25 Scores</h2></th>
+	</tr>
+	<tr>
+		<th><h3>Name</h3></th>
+		<th><h3>Score</h3></th>
+	</tr>
+{% for score_user in scores %}
+	{% if score_user[1] == user_name %}
+	<tr align="center">
+		<td><b><i>{{score_user[1]}}</b></i></td>
+		<td><b><i>{{score_user[0]}}</b></i></td>
+	</tr>
+	{% endif %}
+	{% if score_user[1] != user_name %}
+	<tr align="center">
+		<td>{{score_user[1]}}</td> 
+		<td>{{score_user[0]}}</td>
+	</tr>
+	{% endif %}
+{% endfor %}
+</table>
+{% endblock %}
