@@ -1,55 +1,65 @@
 {% extends "base.html" %}
 {% block body %}
 <h2>Tres Tigres</h2>
+	<div id="scorebox">
+		<h3>You have <span id="points">{{user_points}}</span> points.</h3>
+		<h4><a href="{{url_for('show_points')}}">View the top scores.</a></h4>
+	</div><br>
+<div class="gamebox">
 	<p>
-		<p>
-			<div>
-			<h4>You have <span id="points">{{user_points}}</span> points.</h4>
-		</div>
+		Based on how the word <b>"{{word}}"</b> was used in this tweet:
+	</p>
+	<div id="tweets">
+		<p class="emoji" id="twitter">
+			{{tweet}}
 		</p>
-		<p>
-			For the word <b>"{{word}}"</b> in this tweet:
-		</p>
-		<div id="tweets">
-			<p class="emoji">
-				"{{tweet}}"
-			</p>
-		</div>
-		<p>Which sentence below does <b>"{{word}}"</b> fit into the best? 
+	</div>
+		<p>Which sentence below does <b>"{{word}}"</b> fit into the best?
 			<button class="new_tweet" id="new_tweet">
-				Show me another tweet with '{{word}}' in it.
+			Show me another tweet with '{{word}}' in it.
 			</button>
 		</p>
-		{% for tag_sent in tags_sentences %}
-			<p>
-				<button class="game" id="{{tag_sent[0]}}" value="{{tag_sent[1]}}">
+</div>
+<table border="0" cellpadding="20">
+	<tr>
+		<td>
+		{% for tag_sent in first_half %}
+		<button class="game" id="{{tag_sent[0]}}" value="{{tag_sent[1]}}">
 					{{tag_sent[1]}}
-				</button> ({{tag_sent[0]}})
-			</p>
+			</button>
+		<br>
 		{% endfor %}
-	</p>
+		</td>
+		<td>
+		{% for tag_sent in second_half %}
+		<button class="game" id="{{tag_sent[0]}}" value="{{tag_sent[1]}}">
+					{{tag_sent[1]}}
+			</button>
+		<br>
+		{% endfor %}
+		</td>
+	</tr>
+</table>
 {% endblock %}
-
 
 {% block javascript %}
 <script type="text/javascript">
+	var tweets_gotten = 0;
 	$(document).ready(function(){
 		$('button.game').click(function(){
 			var tag = $(this).attr('id');
 			var word = "{{word}}";
 			$.post("/game", {"tag": tag, "word": word}, function(responseFromServer){
-				console.log(responseFromServer);
-				// what i'd like to do is just return the new page.
-				$("#points").html(responseFromServer)
+				location.reload();
 			});
 
 		});
 		$('button.new_tweet').click(function(){
 			var word = "{{word}}";
 			var tweet = "{{tweet}}";
-			$.post("/game/more_tweets", {"word": word, "tweet": tweet}, function(responseFromServer){
-				console.log(responseFromServer);
-				// how can i do this for more than 1 click on a page?
+			var tweet_list = "{{tweet_list}}"
+			tweets_gotten++
+			$.post("/game/more_tweets", {"word": word, "tweet": tweet, "tweets_gotten": tweets_gotten, "tweet_list": tweet_list}, function(responseFromServer){
 				$('#tweets').append(responseFromServer);
 			});
 		});
