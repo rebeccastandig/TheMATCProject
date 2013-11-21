@@ -1,0 +1,75 @@
+/*#twitter{
+	color:red;
+}*/
+
+.scorebox{
+	float: right;
+	padding-left: .5em;
+	padding-right: .5em;
+	padding-bottom: .2em;
+	outline-style: double;
+	outline-color:black;
+	background-color: #a4ec6a;
+}
+
+.pointbox{
+	display: inline-block;
+	padding-left: .5em;
+	padding-right: .5em;
+	padding-bottom: .2em;
+	outline-style: double;
+	outline-color:black;
+	background-color: #a4ec6a;
+}
+
+.top25box{
+	display: inline-block;
+	padding: .5em;
+	margin: .5em;
+	margin-top: 1em;
+	margin-left: 8.8em;
+	background-color: #f6e56a;
+	box-shadow: 10px 10px 5px #888888;
+}
+
+
+.gamebox{
+	padding-top: .5em;
+	display: inline-block;
+}
+
+.originaltweet{
+	border:2px solid;
+	border-radius:25px;
+	border-color: black;
+	padding-left: .5em;
+	padding-right: .5em;
+	padding-top: .5em;
+	margin-bottom: .5em;
+}
+
+.a_new_tweet{
+	border:2px solid;
+	border-radius:25px;
+	border-color: black;
+	padding-left: .5em;
+	padding-right: .5em;
+	padding-top: .5em;
+	margin-bottom: .5em;
+}
+
+.game{
+	margin-bottom: .5em;
+	/*background-color: white;*/
+}
+
+.tiger{
+	border-style: solid;
+	border-color: black;
+	padding-left: .5em;
+	padding-right: .5em;
+	padding-top: .25em;
+	margin-bottom: 1em;
+	background: url(static/img/tiger.jpg);
+	background-repeat: no-repeat;
+}

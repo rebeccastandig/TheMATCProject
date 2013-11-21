@@ -2,21 +2,25 @@
 {% block header %}
 <p><b>{{logged_in}}</b>
 	<a href="{{url_for('logout')}}">{{not_you}}</a></p>
-{% endblock %}
-{% block body %}
-<h2>Tres Tigres</h2>
-	<div id="scorebox">
+	<div class="scorebox">
 		<h3>You have <span id="points">{{user_points}}</span> points.</h3>
 		<h4><a href="{{url_for('show_points')}}">View the top scores.</a></h4>
 	</div><br>
+{% endblock %}
+{% block body %}
+<div class='tiger'>
+<h2>Tres Tigres</h2>
+	
 <div class="gamebox">
 	<p>
 		Based on how the word <b>"{{word}}"</b> was used in this tweet:
 	</p>
-	<div id="tweets">
-		<p class="emoji" id="twitter">
-			{{tweet}}
-		</p>
+	<div class="tweets">
+		<div class='originaltweet'>
+			<p class="emoji" id="twitter">
+				<b>{{tweet}}</b>
+			</p>
+		</div>
 	</div>
 		<p>Which sentence below does <b>"{{word}}"</b> fit into the best?
 			<button class="new_tweet" id="new_tweet">
@@ -64,9 +68,10 @@
 			var tweet_list = "{{tweet_list}}"
 			tweets_gotten++
 			$.post("/game/more_tweets", {"word": word, "tweet": tweet, "tweets_gotten": tweets_gotten, "tweet_list": tweet_list}, function(responseFromServer){
-				$('#tweets').append(responseFromServer);
+				$('.tweets').append(responseFromServer);
 			});
 		});
 	});
 </script>
+</div>
 {% endblock %}

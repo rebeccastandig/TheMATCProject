@@ -2,11 +2,19 @@
 {% block header %}
 <p><b>{{logged_in}}</b>
 	<a href="{{url_for('logout')}}">{{not_you}}</a></p>
+	<div class="pointbox">
+		<h3>You have <span id="points">{{user_score}}</span> points.</h3>
+	</div><br>
+
+	{% for score_user in scores %}
+		{% if score_user[1] == user %}
+			<div class="top25box">
+				<h3>You're in the Top 25 Scores!</h3>
+			</div><br>
+		{% endif %}
+	{% endfor %}
 {% endblock %}
 {% block body %}
-<div id="scorebox">
-<h3>Your score is {{user_score}}</h3><br>
-</div>
 <table border="4" width="50%" cellpadding="2">
 	<tr>
 		<th colspan="2"><h2>Top 25 Scores</h2></th>
