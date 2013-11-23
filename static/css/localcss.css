@@ -2,6 +2,11 @@
 	color:red;
 }*/
 
+/*.navbar-inner{
+	ask siena about this
+	background-color: #6aecf6; !important
+}
+*/
 .scorebox{
 	float: right;
 	padding-left: .5em;
@@ -46,6 +51,7 @@
 	padding-right: .5em;
 	padding-top: .5em;
 	margin-bottom: .5em;
+	/*background-color: #a4ec6a;*/
 }
 
 .a_new_tweet{
@@ -60,16 +66,19 @@
 
 .game{
 	margin-bottom: .5em;
-	/*background-color: white;*/
+	background-color: #a4ec6a;
+}
+
+.new_tweet{
+	background-color: #a4ec6a;
 }
 
 .tiger{
-	border-style: solid;
-	border-color: black;
+	border-image: url("/static/img/tigerprint.gif") 30 30 round;
+	border-width: 10px;
 	padding-left: .5em;
 	padding-right: .5em;
 	padding-top: .25em;
 	margin-bottom: 1em;
-	background: url(static/img/tiger.jpg);
-	background-repeat: no-repeat;
+	background-color: #eafbfa;
 }
