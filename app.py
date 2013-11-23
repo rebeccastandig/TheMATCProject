@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, flash, redirect, url_for, session
+from flask import Flask, render_template, request, flash, redirect, url_for, session, Markup
 import model
 
 app = Flask(__name__)
@@ -316,7 +316,7 @@ def game():
 		logged_in = 'Logged in as: %s.'%user
 		not_you = 'Not %s?'%session['user']
 
-		return render_template('game.html', word = word_for_game, tweet = tweet_for_game, user_points=user_points, tweet_list=tweet_list, first_half=first_half, second_half=second_half, logged_in=logged_in, user=user, not_you=not_you)
+		return render_template('game.html', word = word_for_game, tweet = Markup(tweet_for_game).unescape(), user_points=user_points, tweet_list=tweet_list, first_half=first_half, second_half=second_half, logged_in=logged_in, user=user, not_you=not_you)
 	
 
 @app.route("/game", methods=['POST'])
@@ -348,7 +348,7 @@ def new_tweet():
 				return "There are no more tweets with \"%s\" in them."%word
 			else:
 				new_tweet = unicode(new_tweet, 'utf-8', errors='replace')
-				return render_template('moretweets.html', tweet=new_tweet)
+				return render_template('moretweets.html', tweet=Markup(new_tweet).unescape())
 		else:
 			new_tweet = "There are no more tweets with \"%s\" in them."%word
 			return render_template('moretweets.html', tweet=new_tweet)
