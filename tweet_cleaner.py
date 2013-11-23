@@ -11,14 +11,14 @@ def split_periods(tweet_after_split):
 	for word in tweet_after_split:
 		split_words = word.split('..')
 		for word in split_words:
-			if word == '':
+			if not len(word) > 0:
 				pass
 			else:
 				new_tweet.append(word)
 	for word in new_tweet:
 		split_words = word.split('.')
 		for word in split_words:
-			if word == '':
+			if not len(word) > 0:
 				pass
 			else:
 				final_tweet.append(word)
@@ -30,14 +30,14 @@ def split_excl(split_tweet):
 	for word in split_tweet:
 		split_words = word.split('!!')
 		for word in split_words:
-			if word == '':
+			if not len(word) > 0:
 				pass
 			else:
 				new_tweet.append(word)
 	for word in new_tweet:
 		split_words = word.split('!')
 		for word in split_words:
-			if word == '':
+			if not len(word) > 0:
 				pass
 			else:
 				final_tweet.append(word)
@@ -49,14 +49,14 @@ def split_ques(split_tweet):
 	for word in split_tweet:
 		split_words = word.split('??')
 		for word in split_words:
-			if word == '':
+			if not len(word) > 0:
 				pass
 			else:
 				new_tweet.append(word)
 	for word in new_tweet:
 		split_words = word.split('?')
 		for word in split_words:
-			if word == '':
+			if not len(word) > 0:
 				pass
 			else:
 				final_tweet.append(word)
@@ -67,7 +67,7 @@ def split_dbl_qt(split_tweet):
 	for word in split_tweet:
 		split_words = word.split('\"')
 		for word in split_words:
-			if word == '':
+			if not len(word) > 0:
 				pass
 			else:
 				new_tweet.append(word)
@@ -78,7 +78,7 @@ def split_sgl_qt(split_tweet):
 	for word in split_tweet:
 		split_words = word.split('\'')
 		for word in split_words:
-			if word == '':
+			if not len(word) > 0:
 				pass
 			else:
 				new_tweet.append(word)
@@ -90,14 +90,14 @@ def split_commas(split_tweet):
 	for word in split_tweet:
 		split_words = word.split(',,')
 		for word in split_words:
-			if word == '':
+			if not len(word) > 0:
 				pass
 			else:
 				new_tweet.append(word)
 	for word in new_tweet:
 		split_words = word.split(',')
 		for word in split_words:
-			if word == '':
+			if not len(word) > 0:
 				pass
 			else:
 				final_tweet.append(word)
@@ -109,14 +109,14 @@ def split_slashes(split_tweet):
 	for word in split_tweet:
 		split_words = word.split('\\\\')
 		for word in split_words:
-			if word == '':
+			if not len(word) > 0:
 				pass
 			else:
 				new_tweet.append(word)
 	for word in new_tweet:
 		split_words = word.split('\\')
 		for word in split_words:
-			if word == '':
+			if not len(word) > 0:
 				pass
 			else:
 				final_tweet.append(word)

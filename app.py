@@ -12,7 +12,7 @@ def index():
 		return render_template('index.html')
 	else:
 		greeting = 'Hello %s!'%session['user']
-		logged_in = 'Logged in as %s.'%session['user']
+		logged_in = 'Logged in as: %s.'%session['user']
 		not_you = 'Not %s?'%session['user']
 		return render_template('index.html', greeting=greeting, logged_in=logged_in, not_you=not_you)
 
@@ -108,7 +108,7 @@ def logout():
 @app.route("/about")
 def about_tt():
 	if session:
-		logged_in = 'Logged in as %s.'%session['user']
+		logged_in = 'Logged in as: %s.'%session['user']
 		not_you = 'Not %s?'%session['user']
 		return render_template('about.html', logged_in=logged_in, not_you=not_you)
 	else:
@@ -117,7 +117,7 @@ def about_tt():
 @app.route("/about/tt")
 def abt_tt():
 	if session:
-		logged_in = 'Logged in as %s.'%session['user']
+		logged_in = 'Logged in as: %s.'%session['user']
 		not_you = 'Not %s?'%session['user']
 		return render_template('about_tt.html', logged_in=logged_in, not_you=not_you)
 	else:
@@ -126,7 +126,7 @@ def abt_tt():
 @app.route("/about/matc")
 def abt_matc():
 	if session:
-		logged_in = 'Logged in as %s.'%session['user']
+		logged_in = 'Logged in as: %s.'%session['user']
 		not_you = 'Not %s?'%session['user']
 		return render_template('about_matc.html', logged_in=logged_in, not_you=not_you)
 	else:
@@ -135,7 +135,7 @@ def abt_matc():
 @app.route("/about/ttud")
 def abt_ttud():
 	if session:
-		logged_in = 'Logged in as %s.'%session['user']
+		logged_in = 'Logged in as: %s.'%session['user']
 		not_you = 'Not %s?'%session['user']
 		return render_template('about_ttud.html', logged_in=logged_in, not_you=not_you)
 	else:
@@ -144,7 +144,7 @@ def abt_ttud():
 @app.route("/about/faqs")
 def abt_faqs():
 	if session:
-		logged_in = 'Logged in as %s.'%session['user']
+		logged_in = 'Logged in as: %s.'%session['user']
 		not_you = 'Not %s?'%session['user']
 		return render_template('about_faqs.html', logged_in=logged_in, not_you=not_you)
 	else:
@@ -153,7 +153,7 @@ def abt_faqs():
 @app.route("/corpus")
 def corpus():
 	if session:
-		logged_in = 'Logged in as %s.'%session['user']
+		logged_in = 'Logged in as: %s.'%session['user']
 		not_you = 'Not %s?'%session['user']
 		return render_template('corpus.html', logged_in=logged_in, not_you=not_you)
 	else:
@@ -162,7 +162,7 @@ def corpus():
 @app.route("/contact")
 def contact_me():
 	if session:
-		logged_in = 'Logged in as %s.'%session['user']
+		logged_in = 'Logged in as: %s.'%session['user']
 		not_you = 'Not %s?'%session['user']
 		return render_template('contact_me.html', logged_in=logged_in, not_you=not_you)
 	else:
@@ -171,7 +171,7 @@ def contact_me():
 @app.route("/linguists")
 def linguist_info():
 	if session:
-		logged_in = 'Logged in as %s.'%session['user']
+		logged_in = 'Logged in as: %s.'%session['user']
 		not_you = 'Not %s?'%session['user']
 		return render_template('info_for_linguists.html', logged_in=logged_in, not_you=not_you)
 	else:
@@ -180,7 +180,7 @@ def linguist_info():
 @app.route("/guide")
 def guide():
 	if session:
-		logged_in = 'Logged in as %s.'%session['user']
+		logged_in = 'Logged in as: %s.'%session['user']
 		not_you = 'Not %s?'%session['user']
 		return render_template('pos_guide.html', logged_in=logged_in, not_you=not_you)
 	else:
@@ -189,7 +189,7 @@ def guide():
 @app.route("/guide/download")
 def dl_guide():
 	if session:
-		logged_in = 'Logged in as %s.'%session['user']
+		logged_in = 'Logged in as: %s.'%session['user']
 		not_you = 'Not %s?'%session['user']
 		return render_template('download_guide.html', logged_in=logged_in, not_you=not_you)
 	else:
@@ -206,7 +206,7 @@ def dl_guide():
 @app.route("/corpus/download")
 def corpus_download():
 	if session:
-		logged_in = 'Logged in as %s.'%session['user']
+		logged_in = 'Logged in as: %s.'%session['user']
 		not_you = 'Not %s?'%session['user']
 		return render_template('corpus_download_main.html', logged_in=logged_in, not_you=not_you)
 	else:
@@ -217,7 +217,7 @@ def corpus_download_pos():
 	corpus = model.get_corpus_pos()
 	# need to be able to dl this
 	if session:
-		logged_in = 'Logged in as %s.'%session['user']
+		logged_in = 'Logged in as: %s.'%session['user']
 		not_you = 'Not %s?'%session['user']
 		return render_template('corpus_download.html', logged_in=logged_in, corpus=corpus, not_you=not_you)
 	else:
@@ -229,7 +229,7 @@ def corpus_download_words():
 	# need to be able to dl this
 	corpus = model.get_corpus_words()
 	if session:
-		logged_in = 'Logged in as %s.'%session['user']
+		logged_in = 'Logged in as: %s.'%session['user']
 		not_you = 'Not %s?'%session['user']
 		return render_template('corpus_download.html', logged_in=logged_in, corpus=corpus, not_you=not_you)
 	else:
@@ -240,7 +240,7 @@ def corpus_browse():
 	# i'd like to add searching ability too
 	# for searching, they'd just have to search like 'word_whatever they're searching for' etc
 	if session:
-		logged_in = 'Logged in as %s.'%session['user']
+		logged_in = 'Logged in as: %s.'%session['user']
 		not_you = 'Not %s?'%session['user']
 		return render_template('browse.html', logged_in=logged_in, not_you=not_you)
 	else:
@@ -250,7 +250,7 @@ def corpus_browse():
 def corpus_pos_list():
 	tag_list = model.get_pos()
 	if session:
-		logged_in = 'Logged in as %s.'%session['user']
+		logged_in = 'Logged in as: %s.'%session['user']
 		not_you = 'Not %s?'%session['user']
 		return render_template('browse_list_pos.html', logged_in=logged_in, corpus_list=tag_list, not_you=not_you)
 	else:
@@ -260,7 +260,7 @@ def corpus_pos_list():
 def corpus_words_list():
 	word_list = model.get_words()
 	if session:
-		logged_in = 'Logged in as %s.'%session['user']
+		logged_in = 'Logged in as: %s.'%session['user']
 		not_you = 'Not %s?'%session['user']
 		return render_template('browse_list_words.html', logged_in=logged_in, corpus_list=word_list, not_you=not_you)
 	else:
@@ -270,7 +270,7 @@ def corpus_words_list():
 def corpus_pos(tag):
 	word_list = model.get_words_by_tag(tag)
 	if session:
-		logged_in = 'Logged in as %s.'%session['user']
+		logged_in = 'Logged in as: %s.'%session['user']
 		not_you = 'Not %s?'%session['user']
 		return render_template('browse_words_by_pos.html', logged_in=logged_in, word_list=word_list, tag=tag, not_you=not_you)
 	else:
@@ -280,7 +280,7 @@ def corpus_pos(tag):
 def corpus_word(word):
 	tag_list = model.get_tags_by_word(word)
 	if session:
-		logged_in = 'Logged in as %s.'%session['user']
+		logged_in = 'Logged in as: %s.'%session['user']
 		not_you = 'Not %s?'%session['user']
 		return render_template('browse_pos_by_word.html', logged_in=logged_in, tag_list=tag_list, word=word, not_you=not_you)
 	else:
@@ -303,25 +303,17 @@ def game():
 		user = session['user']
 		user_name_pts = "user_%s_pts"%user
 		user_points = model.get_string_num(user_name_pts)
-		try:
-			unicode(tweet_for_game, 'ascii')
-		except UnicodeError:
-			tweet_for_game = unicode(tweet_for_game, 'utf-8')
-		else:
-			pass
+
+		tweet_for_game = unicode(tweet_for_game, 'utf-8', errors='replace')
 
 		for tweet in tweet_list:
-			try:
-				unicode(tweet, 'ascii')
-			except UnicodeError:
-				tweet = unicode(tweet, 'utf-8')
-			else:
-				pass
+			tweet = unicode(tweet, 'utf-8', errors='replace')
+
 		pos_sents_tags = model.break_pos_sents(model.get_pos_sentences())
 		first_half = pos_sents_tags[:len(pos_sents_tags)/2]
 		second_half = pos_sents_tags[len(pos_sents_tags)/2:]
 
-		logged_in = 'Logged in as %s.'%user
+		logged_in = 'Logged in as: %s.'%user
 		not_you = 'Not %s?'%session['user']
 
 		return render_template('game.html', word = word_for_game, tweet = tweet_for_game, user_points=user_points, tweet_list=tweet_list, first_half=first_half, second_half=second_half, logged_in=logged_in, user=user, not_you=not_you)
@@ -355,10 +347,7 @@ def new_tweet():
 			if new_tweet == tweet:
 				return "There are no more tweets with \"%s\" in them."%word
 			else:
-				try:
-					unicode(new_tweet, 'ascii')
-				except UnicodeError:
-					new_tweet = unicode(new_tweet, 'utf-8')
+				new_tweet = unicode(new_tweet, 'utf-8', errors='replace')
 				return render_template('moretweets.html', tweet=new_tweet)
 		else:
 			new_tweet = "There are no more tweets with \"%s\" in them."%word
@@ -383,7 +372,7 @@ def show_points():
 		scores = model.get_top_scores()
 		user_name_pts = "user_%s_pts"%user
 		user_score = model.get_string_num(user_name_pts)
-		logged_in = 'Logged in as %s.'%user
+		logged_in = 'Logged in as: %s.'%user
 		not_you = 'Not %s?'%session['user']
 		return render_template("user_and_top_points.html", scores=scores, user_score=user_score, user=user, logged_in=logged_in, not_you=not_you)
 

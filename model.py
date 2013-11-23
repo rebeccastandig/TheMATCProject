@@ -135,6 +135,8 @@ def add_word_tweets(word, tweets):
 	for tweet in tweets:
 		if tweet in prior_tweet_list:
 			pass
+		elif tweet == "":
+			pass
 		else:
 			r_server.rpush(word_word_tweets, tweet)
 
