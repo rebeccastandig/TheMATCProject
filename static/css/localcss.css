@@ -14,7 +14,9 @@
 	padding-bottom: .2em;
 	outline-style: double;
 	outline-color:black;
-	background-color: #a4ec6a;
+	background-image: url('/static/img/darkblue.jpg');
+	background-size: 300%;
+	/*background-color: #a4ec6a;*/
 }
 
 .pointbox{
@@ -24,7 +26,9 @@
 	padding-bottom: .2em;
 	outline-style: double;
 	outline-color:black;
-	background-color: #a4ec6a;
+	background-image: url('/static/img/darkblue.jpg');
+	background-size: 200%;
+	/*background-color: #a4ec6a;*/
 }
 
 .top25box{
@@ -33,7 +37,9 @@
 	margin: .5em;
 	margin-top: 1em;
 	margin-left: 8.8em;
-	background-color: #f6e56a;
+	background-image: url('/static/img/stripes.jpg');
+	background-size: 50%;
+	/*background-color: #f6e56a;*/
 	box-shadow: 10px 10px 5px #888888;
 }
 
@@ -66,11 +72,13 @@
 
 .game{
 	margin-bottom: .5em;
-	background-color: #a4ec6a;
+	background-image: url('/static/img/stripes.jpg');
+	background-size: 25%;
 }
 
 .new_tweet{
-	background-color: #a4ec6a;
+	background-image: url('/static/img/darkblue.jpg');
+	background-size: 200%;
 }
 
 .tiger{
@@ -80,5 +88,7 @@
 	padding-right: .5em;
 	padding-top: .25em;
 	margin-bottom: 1em;
-	background-color: #eafbfa;
+	/*background-color: #eafbfa;*/
 }
+
+
