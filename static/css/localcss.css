@@ -52,18 +52,17 @@
 .originaltweet{
 	border:2px solid;
 	border-radius:25px;
-	border-color: black;
+	border-color: #16796c;
 	padding-left: .5em;
 	padding-right: .5em;
 	padding-top: .5em;
 	margin-bottom: .5em;
-	/*background-color: #a4ec6a;*/
 }
 
 .a_new_tweet{
 	border:2px solid;
 	border-radius:25px;
-	border-color: black;
+	border-color: #16796c;
 	padding-left: .5em;
 	padding-right: .5em;
 	padding-top: .5em;
@@ -88,7 +87,6 @@
 	padding-right: .5em;
 	padding-top: .25em;
 	margin-bottom: 1em;
-	/*background-color: #eafbfa;*/
 }
 
 
