@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, flash, redirect, url_for, session, Markup
+from flask import Flask, render_template, request, flash, redirect, url_for, session, Markup, Response
 import model
 
 app = Flask(__name__)
@@ -207,26 +207,13 @@ def corpus_download():
 @app.route("/corpus/download/pos")
 def corpus_download_pos():
 	corpus = model.get_corpus_pos()
-	# need to be able to dl this
-	if session:
-		logged_in = 'Logged in as: %s.'%session['user']
-		not_you = 'Not %s?'%session['user']
-		return render_template('corpus_download.html', logged_in=logged_in, corpus=corpus, not_you=not_you)
-	else:
-		return render_template('corpus_download.html', corpus = corpus)
-
+	return Response(corpus, mimetype='text/csv')
 
 @app.route("/corpus/download/words")
 def corpus_download_words():
-	# need to be able to dl this
 	corpus = model.get_corpus_words()
-	if session:
-		logged_in = 'Logged in as: %s.'%session['user']
-		not_you = 'Not %s?'%session['user']
-		return render_template('corpus_download.html', logged_in=logged_in, corpus=corpus, not_you=not_you)
-	else:
-		return render_template('corpus_download.html', corpus = corpus)
-
+	return Response(corpus, mimetype='text/csv')
+	
 @app.route("/corpus/browse")
 def corpus_browse():
 	# i'd like to add searching ability too
