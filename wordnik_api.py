@@ -1,6 +1,3 @@
-#!/usr/bin/python
-# -*- coding: <utf-8> -*-
-
 from wordnik import *
 
 # these are the API keys for Wordnik
