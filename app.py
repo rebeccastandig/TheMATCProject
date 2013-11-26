@@ -186,14 +186,6 @@ def guide():
 	else:
 		return render_template('pos_guide.html')
 
-@app.route("/guide/download")
-def dl_guide():
-	if session:
-		logged_in = 'Logged in as: %s.'%session['user']
-		not_you = 'Not %s?'%session['user']
-		return render_template('download_guide.html', logged_in=logged_in, not_you=not_you)
-	else:
-		return render_template('download_guide.html')
 
 #### End Basic Functionality ####
 
@@ -356,7 +348,7 @@ def new_tweet():
 		new_tweet = "There are no more tweets with \"%s\" in them."%word
 		return render_template('moretweets.html', tweet=new_tweet)
 
-@app.route("/howto")
+@app.route("/game/howto")
 def howto():
 	return render_template("tutorial.html")
 
