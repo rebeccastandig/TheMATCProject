@@ -7,13 +7,15 @@
 <p>
 	<h2>About Tres Tigres <image src="/static/img/3tigers.png" width='100'></h2>
 		<h3>What is Tres Tigres<image src="/static/img/3tigers.png" width='50'>?</h3>
-			<p>Tres Tigres is a crowdsourced part of speech tagging game.</p>
-			<!-- talk about madlibs etc -->
+			<p>Tres Tigres is a crowdsourced part of speech tagging game. Users are shown a word and the tweet the word came from. They then choose a MadLib™-style sentence that the word fits into. This tags the word with a part of speech.</p>
 		<h3>How do I play?</h3>
 			<p> If you haven't already, first you'll have to <a href="{{url_for('register')}}">register</a> and <a href="{{url_for('signin')}}">sign in</a>.<br>
 			</p>
+			<p> Then, read the <a href="{{url_for('howto')}}">how to play tutorial</a>.</p>
 		<h3>Do I need linguistic training to play?</h3>
 			<p>Nope! The whole idea behind The Manually Annotated Twitter Corpus Project is to allow linguistic data to be annotated by people with little or no training in linguistics. You don't need to know anything about morphemes or syntax; you just need to be a native or fluent speaker of English who enjoys MadLibs™!</p>
+		<h3> How do I get points?</h3>
+			<p>Each time you tag a word, the game checks to see if other people have already tagged the word with that part of speech. If four other players have already tagged that word with that part of speech, all five of you get 10 points. Then, each time someone tags the word with that part of speech, you all get another 5 points. You don't get any points for a word until at least four other people have tagged it with that part of speech.</p>
 		<h3>What does 'Tres Tigres' mean? Why the name 'Tres Tigres'? </h3>
 			<p>'Tres Tigres' means 'three tigers' in Spanish. As for why I chose it, I like tigers and tongue twisters. There's a fun tongue twister in Spanish about three tigers: 'Tres tristes tigres tragaban trigo en tres tristes trastos sentados tras un trigal. Sentados tras un trigal, en tres tristes trastos tragaban trigo tres tristes tigres.'</p>
 			
