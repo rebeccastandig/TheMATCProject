@@ -1,0 +1,21 @@
+Tag Meaning
+N	Noun
+O	Pronoun
+P	Proper Noun
+M	Verbs, including modals
+PV	Proper Noun + Verbal
+NV	Nominal + Verbal
+Z	Proper Noun + Possessive
+OP	Possessive Pronoun
+J	Adjective
+A	Adverb
+S	Nominal + Possessive
+I	Interjection
+D	Determiner
+V	Verb Particle (not a phrasal verb)
+C	Coordinating Conjunction
+E	Existential 'there'
+PD	Predeterminer
+EV	Existential 'there' + Verb
+SC	Pre/Post Position/Subjunctive Conjunction
+U	Undetermined
