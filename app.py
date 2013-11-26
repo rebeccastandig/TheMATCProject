@@ -356,6 +356,9 @@ def new_tweet():
 		new_tweet = "There are no more tweets with \"%s\" in them."%word
 		return render_template('moretweets.html', tweet=new_tweet)
 
+@app.route("/howto")
+def howto():
+	return render_template("tutorial.html")
 
 
 @app.route("/game/more_tweets/new")
