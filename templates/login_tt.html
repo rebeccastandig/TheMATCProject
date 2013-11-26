@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block body %}
 <h2>You need to <a href="{{url_for('signin')}}">sign in</a> or <a href="{{url_for('register')}}">register</a> to play Tres Tigres.</h2><br>
-<h3>You can always <a href="{{url_for('show_points')}}">view the top scores</a>.</h3>
+<h3>You can always <a href="{{url_for('show_points')}}">view the top scores</a>, or <a href="{{url_for('howto')}}">read the how to play tutorial</a>.</h3>
+
 {% endblock %}
