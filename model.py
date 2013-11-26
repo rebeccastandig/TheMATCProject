@@ -440,29 +440,29 @@ def add_pts_game(word, pos, user):
 	# adds 5 pts to every new user who continues to verify tag thereafter
 	# also adds words to their final tags if verified
 
-	
-	tag_word_word_tag_pos = "tag_word_%s_tag_%s"%(word, pos)
-	users_tagged_as_pos = get_list(tag_word_word_tag_pos)
-	if len(users_tagged_as_pos) == 5:
-		# give each user 10 pts
-		for user_name in users_tagged_as_pos:
-			user_name_pts = "user_%s_pts"%user_name
-			add_user_pts(user_name_pts, 10)
-		word_word = "word_%s"%word
-		word_list = [word_word]
-		tag_tag = "tag_%s"%pos
-		tag_list = [tag_tag]
-		add_tagged_words_pos(pos, word_list)
-		add_final_tag(word, tag_list)
+	if pos != 'U':
+		tag_word_word_tag_pos = "tag_word_%s_tag_%s"%(word, pos)
+		users_tagged_as_pos = get_list(tag_word_word_tag_pos)
+		if len(users_tagged_as_pos) == 5:
+			# give each user 10 pts
+			for user_name in users_tagged_as_pos:
+				user_name_pts = "user_%s_pts"%user_name
+				add_user_pts(user_name_pts, 10)
+			word_word = "word_%s"%word
+			word_list = [word_word]
+			tag_tag = "tag_%s"%pos
+			tag_list = [tag_tag]
+			add_tagged_words_pos(pos, word_list)
+			add_final_tag(word, tag_list)
 
-	elif len(users_tagged_as_pos) > 5:
-		# give each user 5 pts
-		for user_name in users_tagged_as_pos:
-			user_name_pts = "user_%s_pts"%user_name
-			add_user_pts(user_name_pts, 5)
-	else:
-		# don't give them any points if not verified yet
-		pass
+		elif len(users_tagged_as_pos) > 5:
+			# give each user 5 pts
+			for user_name in users_tagged_as_pos:
+				user_name_pts = "user_%s_pts"%user_name
+				add_user_pts(user_name_pts, 5)
+		else:
+			# don't give them any points if not verified yet
+			pass
 
 def get_top_scores():
 	# gets the top 25 scores, in order (highest to lowest)
