@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block header %}
+<p><b>{{logged_in}}</b>
+	<a href="{{url_for('logout')}}">{{not_you}}</a></p>
+{% endblock %}
+{% block body %}
+<h2>Tres Tigres
+<image src="/static/img/3tigers.png" width='100' height='100'>
+</h2>
+
+<h2>How to Play</h2>
+<!-- if you've already read this button -->
+<h3> The game will look similar to this:
+<img src='/static/img/gameshot.png'>
+First, look at the word you're being asked to evaluate:
+<img src='/static/img/ex1.png'>
+Then, look for it in the tweet given:
+<img src='/static/img/ex2.png'>
+If needed, you can always look at more tweets with the word in it.
+<img src='/static/img/ex3.png'>
+Based on how the word was used in the tweet, figure out which sentence below you would put it in. Each sentence corresponds to a different part of speech.
+<img src='/static/img/ex4.png'>
+It is very important to distinguish between parts of speech that are closely related.<br><br>
+For example, nouns vs proper nouns vs pronouns:<br>
+Nouns refer to a person, place or thing (ex: writer). Proper nouns refer to a specific person, place, or thing (ex: Shakespeare). Pronouns refer to a noun (ex: using "she" to refer to "the school principal").<br><br>
+When in doubt, refer back to this page and try to be as specific as possible!<br><br>
+For "T-Rex", you would put it into either the first sentence or third sentence. Which one is more appropriate?
+<img src='/static/img/ex5.png'>
+The third sentence, since it's a proper noun. "T-Rex" is naming a type of dinosaur.
+<img src='/static/img/ex6.png'>
+
+
+
+{% endblock %}
