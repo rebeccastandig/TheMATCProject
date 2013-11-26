@@ -152,7 +152,7 @@ def check_meta(word):
 
 def check_non_words(word):
 	if word != 0:
-		non_words = ['jeje', 'haha', 'mwah', 'bwah', 'muah', 'buah', 'http', 'teeh', 'jeej']
+		non_words = ['jeje', 'haha', 'mwah', 'bwah', 'muah', 'buah', 'http', 'teeh', 'jeej', 'jaja', 'JEJE', 'HAHA', 'MWAH', 'BWAH', 'MUAH', 'BUAH', 'HTTP', 'TEEH', 'JEEJ', 'JAJA']
 		if word[:4] in non_words:
 			word = 0
 		if word != 0:
