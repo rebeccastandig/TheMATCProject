@@ -5,6 +5,8 @@ The whole idea behind The MATC Project is to allow linguistic data to be annotat
 
 There's two parts to The MATC Project: Tres Tigres, and The TwitUrban Dictionary.
 
+[www.thematcproject.org | Click here]
+
 
 ##General Information
 ####Tres Tigres is the crowdsourcing game that manually annotates the linguistic data.
