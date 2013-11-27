@@ -419,19 +419,19 @@ def get_another_tweet(word, tweet):
 def tag_word_game(word, pos, user, tweet):
 	# pos comes in as tag_(POS)
 	# tags a word from the game with tag_POS
+	if pos != 'tag_U':
+		# user_(name)_tag_word_(word)
+		add_user_tag_word(user, word, pos)
 
-	# user_(name)_tag_word_(word)
-	add_user_tag_word(user, word, pos)
+		# tag_word_(word)_tag_(POS)
+		add_tag_word_tag_pos(word, pos, user)
 
-	# tag_word_(word)_tag_(POS)
-	add_tag_word_tag_pos(word, pos, user)
+		# tweet_tag_word_(word)_tag_(POS)
+		add_tweet_tag_word_tag_pos(word, pos, [tweet])
 
-	# tweet_tag_word_(word)_tag_(POS)
-	add_tweet_tag_word_tag_pos(word, pos, [tweet])
-
-	# user_(name)_words_tagged
-	tag_word_tag_pos = 'tag_word_%s_%s'%(word, pos)
-	add_user_words_tagged(user, [tag_word_tag_pos])
+		# user_(name)_words_tagged
+		tag_word_tag_pos = 'tag_word_%s_%s'%(word, pos)
+		add_user_words_tagged(user, [tag_word_tag_pos])
 
 
 def add_pts_game(word, pos, user):
