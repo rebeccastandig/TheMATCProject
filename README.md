@@ -5,7 +5,7 @@ The whole idea behind The MATC Project is to allow linguistic data to be annotat
 
 There's two parts to The MATC Project: Tres Tigres, and The TwitUrban Dictionary.
 
-[Click here](www.thematcproject.org) to go to The MATC Project.
+[Click here](http://www.thematcproject.org) to go to The MATC Project.
 
 
 ##General Information
