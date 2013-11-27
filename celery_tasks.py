@@ -6,7 +6,7 @@ import model
 import wordnik_api
 import tweet_cleaner
 
-celery = Celery('twython_streaming', backend=os.environ.get('REDIS_URL'),  broker=os.environ.get('REDIS_URL')
+celery = Celery('twython_streaming', backend=os.environ.get('REDISTOGO_URL'),  broker=os.environ.get('REDISTOGO_URL')
 
 @celery.task
 def parse_tweets(tweet):
