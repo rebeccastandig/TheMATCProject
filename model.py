@@ -3,7 +3,7 @@ import hashlib
 import random
 import os
 
-r_server = redis.from_url(os.environ.get('REDISTOGO_URL'))
+r_server = redis.from_url(os.environ.get('REDISCLOUD_URL'))
 
 def md5_hash(password):
     return hashlib.md5(password).hexdigest()
