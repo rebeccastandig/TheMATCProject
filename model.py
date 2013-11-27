@@ -58,7 +58,7 @@ def set_user(user):
 	r_server.rpush(user_name, user)
 	r_server.rpush(user_name, user_name_pw)
 	r_server.rpush(user_name, user_name_pts)
-	r_server.incrby(user_name_pts, 0)
+	r_server.incr(user_name_pts, 0)
 	add_all_users(user)
 	add_all_points(user)
 
@@ -144,7 +144,7 @@ def add_user_pts(user_name_pts, pts):
 	# sets & adds user_(name)_pts
 	# user must be string 'user_(name)_pts'
 	# pts must be number, can be negative to decrease
-	r_server.incrby(user_name_pts, pts)
+	r_server.incr(user_name_pts, pts)
 	# leaving pts open so i can write diff function that will discriminate when to add 10 vs 5
 
 def add_user_tag_word(user, word, tag):
