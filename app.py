@@ -339,6 +339,10 @@ def new_tweet():
 def howto():
 	return render_template("tutorial.html")
 
+@app.route("/game/posreference")
+def photoref():
+	return render_template("photoreference.html")
+
 
 @app.route("/game/more_tweets/new")
 def more_tweets(tweet):
