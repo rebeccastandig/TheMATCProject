@@ -60,7 +60,7 @@ def register():
 	else:
 		# if there's a session
 		flash('You\'re already signed in.')
-		return redirect(request.referrer)
+		return redirect(url_for('index'))
 	
 
 @app.route("/signin", methods=['GET', 'POST'])
@@ -88,7 +88,7 @@ def signin():
 	else:
 		# if there's a session
 		flash('You\'re already signed in.')
-		return redirect(request.referrer)
+		return redirect(url_for('index'))
 
 @app.route("/logout")
 def logout():
