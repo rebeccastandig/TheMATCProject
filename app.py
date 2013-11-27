@@ -53,7 +53,7 @@ def register():
 					session['user'] = name
 					ip_address = request.remote_addr
 					last_url = model.get_last_url(ip_address)
-					if last_url != "/signin" and last_url != "/register":
+					if last_url:
 						# redirect back to where they came from
 						return redirect(last_url)
 					else:
@@ -63,8 +63,9 @@ def register():
 				return redirect(url_for('register'))
 	elif not session:
 		url = request.referrer
-		ip_address = request.remote_addr
-		model.keep_url(url, ip_address)
+		if url[-6:] != "signin" and url[-8:] != "register":
+			ip_address = request.remote_addr
+			model.keep_url(url, ip_address)
 		return render_template("register.html")
 	else:
 		# if there's a session
@@ -87,7 +88,7 @@ def signin():
 						session['user'] = name
 						ip_address = request.remote_addr
 						last_url = model.get_last_url(ip_address)
-						if last_url != "/signin" and last_url != "/register":
+						if last_url:
 							return redirect(last_url)
 						else:
 							return redirect(url_for('index'))
@@ -99,8 +100,9 @@ def signin():
 			return redirect(url_for('signin'))
 	elif not session:
 		url = request.referrer
-		ip_address = request.remote_addr
-		model.keep_url(url, ip_address)
+		if url[-6:] != "signin" and url[-8:] != "register":
+			ip_address = request.remote_addr
+			model.keep_url(url, ip_address)
 		return render_template('signin.html')
 	else:
 		# if there's a session
