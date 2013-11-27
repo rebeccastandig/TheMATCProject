@@ -1,8 +1,9 @@
 from wordnik import *
+import os
 
 # these are the API keys for Wordnik
 apiUrl = 'http://api.wordnik.com/v4'
-apiKey = 'secret'
+apiKey = os.environ.get('wordnik_apiKey')
 client = swagger.ApiClient(apiKey, apiUrl)
 
 wordApi = WordsApi.WordsApi(client)

@@ -1,8 +1,9 @@
 from flask import Flask, render_template, request, flash, redirect, url_for, session, Markup, Response
 import model
+import os
 
 app = Flask(__name__)
-app.secret_key ='secret'
+app.secret_key = os.environ.get('flask_secretkey')
 
 #### Basic Functionality ####
 

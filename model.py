@@ -2,8 +2,7 @@ import redis
 import hashlib
 import random
 
-r_server = redis.StrictRedis(host="localhost", port=6379, db=1)
-r_server2 = redis.StrictRedis(host="localhost", port=6379, db=2)
+r_server = redis.StrictRedis(host="redistogo:a115bdd0d5837ac2394d911e7aa5d541@grideye.redistogo.com", port=9612)
 
 def md5_hash(password):
     return hashlib.md5(password).hexdigest()
@@ -460,9 +459,10 @@ def add_pts_game(word, pos, user):
 			for user_name in users_tagged_as_pos:
 				user_name_pts = "user_%s_pts"%user_name
 				add_user_pts(user_name_pts, 5)
-		else:
-			# don't give them any points if not verified yet
-			pass
+	else:
+		# don't give them any points if not verified yet
+		pass
+	
 
 def get_top_scores():
 	# gets the top 25 scores, in order (highest to lowest)
@@ -515,15 +515,13 @@ def get_top_scores():
 
 def keep_url(session_url, ip_address):
 	# save the url with ip_address as the key
-	# use r_server2
-	r_server2.set(ip_address, session_url)
+	r_server.set(ip_address, session_url)
 	
 
 def get_last_url(ip_address):
 	# use ip_address as the key to get the last url, then del the key
-	# use r_server2
-	last_url = r_server2.get(ip_address)
-	r_server2.delete(ip_address)
+	last_url = r_server.get(ip_address)
+	r_server.delete(ip_address)
 	return last_url
 
 #### End URL Functions #####

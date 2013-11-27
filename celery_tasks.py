@@ -12,7 +12,7 @@ celery = Celery('twython_streaming', backend='redis://localhost:6379/1',  broker
 def parse_tweets(tweet):
 	if len(tweet) > 0:
 		keep_tweet = tweet
-		tweet = tweet[0].split(' ')
+		tweet = tweet[0].split()
 		cleaned_tweet = tweet_cleaner.clean_tweet(tweet)
 		words = []
 		final_words = []
