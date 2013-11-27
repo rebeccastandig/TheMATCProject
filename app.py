@@ -51,21 +51,11 @@ def register():
 					model.set_user_pw(name, pw)
 					flash('Thanks for registering! You\'re now signed in.')
 					session['user'] = name
-					ip_address = request.remote_addr
-					last_url = model.get_last_url(ip_address)
-					if last_url:
-						# redirect back to where they came from
-						return redirect(last_url)
-					else:
-						return redirect(url_for('index'))
+					return redirect(url_for('index'))
 			else:
 				flash('All fields are required.')
 				return redirect(url_for('register'))
 	elif not session:
-		url = request.referrer
-		if url[-6:] != "signin" and url[-8:] != "register":
-			ip_address = request.remote_addr
-			model.keep_url(url, ip_address)
 		return render_template("register.html")
 	else:
 		# if there's a session
@@ -86,12 +76,7 @@ def signin():
 				if name_is_alphanum == True and pw_is_alphanum == True:
 					if model.auth_login(name, pw) == True:
 						session['user'] = name
-						ip_address = request.remote_addr
-						last_url = model.get_last_url(ip_address)
-						if last_url:
-							return redirect(last_url)
-						else:
-							return redirect(url_for('index'))
+						return redirect(url_for('index'))
 					else:
 						flash('Your user name and/or password didn\'t match our records. Please try signing in again.')
 						return redirect(url_for('signin'))
@@ -99,10 +84,6 @@ def signin():
 			flash('Your user name and/or password didn\'t match our records. Please try signing in again.')
 			return redirect(url_for('signin'))
 	elif not session:
-		url = request.referrer
-		if url[-6:] != "signin" and url[-8:] != "register":
-			ip_address = request.remote_addr
-			model.keep_url(url, ip_address)
 		return render_template('signin.html')
 	else:
 		# if there's a session

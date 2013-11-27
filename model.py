@@ -512,21 +512,6 @@ def get_top_scores():
 
 #### End Game Functions ####
 
-#### URL Functions ####
-
-def keep_url(session_url, ip_address):
-	# save the url with ip_address as the key
-	r_server.set(ip_address, session_url)
-	
-
-def get_last_url(ip_address):
-	# use ip_address as the key to get the last url, then del the key
-	last_url = r_server.get(ip_address)
-	r_server.delete(ip_address)
-	return last_url
-
-#### End URL Functions #####
-
 #### End Flask Uses ####
 
 
