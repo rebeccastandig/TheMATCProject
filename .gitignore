@@ -34,5 +34,4 @@ venv
 test_twython
 keys.py
 
-#templates
-Procfile
+.env
