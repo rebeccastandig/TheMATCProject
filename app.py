@@ -53,8 +53,11 @@ def register():
 					session['user'] = name
 					ip_address = request.remote_addr
 					last_url = model.get_last_url(ip_address)
-					# redirect back to where they came from
-					return redirect(last_url)
+					if last_url != "/signin" and last_url != "/register":
+						# redirect back to where they came from
+						return redirect(last_url)
+					else:
+						return redirect(url_for('index'))
 			else:
 				flash('All fields are required.')
 				return redirect(url_for('register'))
@@ -84,7 +87,10 @@ def signin():
 						session['user'] = name
 						ip_address = request.remote_addr
 						last_url = model.get_last_url(ip_address)
-						return redirect(last_url)
+						if last_url != "/signin" and last_url != "/register":
+							return redirect(last_url)
+						else:
+							return redirect(url_for('index'))
 					else:
 						flash('Your user name and/or password didn\'t match our records. Please try signing in again.')
 						return redirect(url_for('signin'))
