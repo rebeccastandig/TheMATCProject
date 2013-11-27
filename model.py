@@ -1,8 +1,9 @@
 import redis
 import hashlib
 import random
+import os
 
-r_server = redis.StrictRedis(host="redistogo:a115bdd0d5837ac2394d911e7aa5d541@grideye.redistogo.com", port=9612)
+r_server = redis.from_url(os.environ.get('REDISTOGO_URL'))
 
 def md5_hash(password):
     return hashlib.md5(password).hexdigest()
