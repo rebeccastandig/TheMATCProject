@@ -29,19 +29,19 @@ def register():
 			pw_is_alphanum = model.check_alphanum(pw)
 			if name_is_alphanum == False:
 				flash('Invalid user name. Alphanumeric characters only (A-Z, a-z, 0-9).')
-				return redirect(url_for('register'))
+				return render_template("register.html")
 			elif pw_is_alphanum == False:
 				flash('Invalid password. Alphanumeric characters only (A-Z, a-z, 0-9).')
-				return redirect(url_for('register'))
+				return render_template("register.html")
 			elif 6 > len(name) or 15 < len(name):
 				flash('Invalid user name. User name must be between 6 and 15 characters.')
-				return redirect(url_for('register'))
+				return render_template("register.html")
 			elif 6 > len(pw) or 15 < len(pw):
 				flash('Invalid password. Password must be between 6 and 15 characters.')
-				return redirect(url_for('register'))
+				return render_template("register.html")
 			elif pw != verify_pw:
 				flash('Passwords must match.')
-				return redirect(url_for('register'))
+				return render_template("register.html")
 			elif (pw == verify_pw) and name:
 				if model.check_if_user(name) == True:
 					flash('You\'re already registered. Please sign in.')
@@ -54,7 +54,7 @@ def register():
 					return redirect(url_for('index'))
 			else:
 				flash('All fields are required.')
-				return redirect(url_for('register'))
+				return render_template("register.html")
 	elif not session:
 		return render_template("register.html")
 	else:
@@ -79,10 +79,10 @@ def signin():
 						return redirect(url_for('index'))
 					else:
 						flash('Your user name and/or password didn\'t match our records. Please try signing in again.')
-						return redirect(url_for('signin'))
+						return render_template('signin.html')
 		else:
 			flash('Your user name and/or password didn\'t match our records. Please try signing in again.')
-			return redirect(url_for('signin'))
+			return render_template('signin.html')
 	elif not session:
 		return render_template('signin.html')
 	else:
