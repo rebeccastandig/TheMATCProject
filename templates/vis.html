@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% block body %}
+
+<h2>View Visualizations By Part of Speech</h2>
+<p>Please refer to the <a href="{{url_for('guide')}}">part of speech guide</a> for more information on what each tag refers to.</p>
+<table cellpadding="10">
+  <tr >
+    <td>
+      <h3><a href="{{url_for('vis_n')}}">Words Tagged as "N"</a></h3>
+    </td>
+    <td>
+      <h3><a href="{{url_for('vis_o')}}">Words Tagged as "O"</a></h3>
+    </td>
+    <td>
+      <h3><a href="{{url_for('vis_p')}}">Words Tagged as "P"</a></h3>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <h3><a href="{{url_for('vis_m')}}">Words Tagged as "M"</a></h3>
+    </td>
+    <td>
+      <h3><a href="{{url_for('vis_pv')}}">Words Tagged as "PV"</a></h3>
+    </td>
+    <td>
+      <h3><a href="{{url_for('vis_nv')}}">Words Tagged as "NV"</a></h3>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <h3><a href="{{url_for('vis_z')}}">Words Tagged as "Z"</a></h3>
+    </td>
+    <td>
+      <h3><a href="{{url_for('vis_op')}}">Words Tagged as "OP"</a></h3>
+    </td>
+    <td>
+      <h3><a href="{{url_for('vis_j')}}">Words Tagged as "J"</a></h3>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <h3><a href="{{url_for('vis_a')}}">Words Tagged as "A"</a></h3>
+    </td>
+    <td>
+      <h3><a href="{{url_for('vis_s')}}">Words Tagged as "S"</a></h3>
+    </td>
+    <td>
+      <h3><a href="{{url_for('vis_i')}}">Words Tagged as "I"</a></h3>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <h3><a href="{{url_for('vis_d')}}">Words Tagged as "D"</a></h3>
+    </td>
+    <td>
+      <h3><a href="{{url_for('vis_v')}}">Words Tagged as "V"</a></h3>
+    </td>
+    <td>
+      <h3><a href="{{url_for('vis_c')}}">Words Tagged as "C"</a></h3>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <h3><a href="{{url_for('vis_e')}}">Words Tagged as "E"</a></h3>
+    </td>
+    <td>
+      <h3><a href="{{url_for('vis_pd')}}">Words Tagged as "PD"</a></h3>
+    </td>
+    <td>
+      <h3><a href="{{url_for('vis_ev')}}">Words Tagged as "EV"</a></h3>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <h3><a href="{{url_for('vis_sc')}}">Words Tagged as "SC"</a></h3>
+  </tr>
+</table>
+
+{% endblock %}

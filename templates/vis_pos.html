@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block body %}
+<h2>Words Tagged as "{{pos}}"</h2>
+<p>The larger a word bubble is, the more times it has been used in a tweet as this part of speech.<br>
+If you hover your mouse over a word bubble, you can see in how many tweets the word was used as this part of speech.</p>
+<div class="bubblechart">
+  <ul class="bubblechains">
+    <li>
+      <table>
+        {% for word_num in words %}
+        <tr><td>{{word_num[0]}}</td><td>{{word_num[1]}}</td></tr>
+        {% endfor %}
+      </table>
+    </li>
+  </ul>
+ </div>
+
+{% endblock %}
