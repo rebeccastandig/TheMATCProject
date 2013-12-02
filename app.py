@@ -355,5 +355,109 @@ def show_points():
 
 #### End Game Functionality ####
 
+#### Visualization Functionality ####
+@app.route("/vis")
+def vis():
+	# lists all pos, you can choose which one you want to visualize
+	return render_template("vis.html")
+
+@app.route("/vis/N")
+def vis_n():
+	words = model.final_tags_pos("N")
+	return render_template("vis_pos.html", words=words, pos='N')
+
+@app.route("/vis/O")
+def vis_o():
+	words = model.final_tags_pos("O")
+	return render_template("vis_pos.html", words=words, pos='O')
+
+@app.route("/vis/P")
+def vis_p():
+	words = model.final_tags_pos("P")
+	return render_template("vis_pos.html", words=words, pos='P')
+
+@app.route("/vis/M")
+def vis_m():
+	words = model.final_tags_pos("M")
+	return render_template("vis_pos.html", words=words, pos='M')
+
+@app.route("/vis/PV")
+def vis_pv():
+	words = model.final_tags_pos("PV")
+	return render_template("vis_pos.html", words=words, pos='PV')
+
+@app.route("/vis/NV")
+def vis_nv():
+	words = model.final_tags_pos("NV")
+	return render_template("vis_pos.html", words=words, pos='NV')
+
+@app.route("/vis/Z")
+def vis_z():
+	words = model.final_tags_pos("Z")
+	return render_template("vis_pos.html", words=words, pos='Z')
+
+@app.route("/vis/OP")
+def vis_op():
+	words = model.final_tags_pos("OP")
+	return render_template("vis_pos.html", words=words, pos='OP')
+
+@app.route("/vis/J")
+def vis_j():
+	words = model.final_tags_pos("J")
+	return render_template("vis_pos.html", words=words, pos='J')
+
+@app.route("/vis/A")
+def vis_a():
+	words = model.final_tags_pos("A")
+	return render_template("vis_pos.html", words=words, pos='A')
+
+@app.route("/vis/S")
+def vis_s():
+	words = model.final_tags_pos("S")
+	return render_template("vis_pos.html", words=words, pos='S')
+
+@app.route("/vis/I")
+def vis_i():
+	words = model.final_tags_pos("I")
+	return render_template("vis_pos.html", words=words, pos='I')
+
+@app.route("/vis/D")
+def vis_d():
+	words = model.final_tags_pos("D")
+	return render_template("vis_pos.html", words=words, pos='D')
+
+@app.route("/vis/V")
+def vis_v():
+	words = model.final_tags_pos("V")
+	return render_template("vis_pos.html", words=words, pos='V')
+
+@app.route("/vis/C")
+def vis_c():
+	words = model.final_tags_pos("C")
+	return render_template("vis_pos.html", words=words, pos='C')
+
+@app.route("/vis/E")
+def vis_e():
+	words = model.final_tags_pos("E")
+	return render_template("vis_pos.html", words=words, pos='E')
+
+@app.route("/vis/PD")
+def vis_pd():
+	words = model.final_tags_pos("PD")
+	return render_template("vis_pos.html", words=words, pos='PD')
+
+@app.route("/vis/EV")
+def vis_ev():
+	words = model.final_tags_pos("EV")
+	return render_template("vis_pos.html", words=words, pos='EV')
+
+@app.route("/vis/SC")
+def vis_sc():
+	words = model.final_tags_pos("SC")
+	return render_template("vis_pos.html", words=words, pos='SC')
+
+
+#### End Visualization Functionality ####
+
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=os.environ.get('PORT'))
