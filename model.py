@@ -217,15 +217,6 @@ def add_final_tag(word, tag_list):
 		else:
 			r_server.rpush(final_tag_word_word, tag)
 
-def set_num_tweets_final_tag_pos(word, pos):
-	# sets final_tag_word_(word)_tag_(POS)
-	# word & pos must be string
-	# checks len(tweet_tag_word_(word)_tag_(POS))
-	final_tag_word_word_tag_pos = 'final_tag_word_%s_tag_%s'%(word, pos)
-	tweet_tag_word_word_tag_pos = 'tweet_tag_word_%s_tag_%s'%(word, pos)
-	num_tweets = get_num_list(tweet_tag_word_word_tag_pos)
-	r_server.set(final_tag_word_word_tag_pos, num_tweets)
-
 def set_game_words_tweets(word_list, tweet):
 	# ***need to check to make sure no words are '(pos)_tweets' or anything like that before adding to word list.***
 	add_all_words(word_list)
@@ -511,6 +502,25 @@ def get_top_scores():
 
 
 #### End Game Functions ####
+
+#### Visualization Functions ####
+
+def final_tags_pos(pos):
+	# gets the words tagged with pos, & num tweets each word appears in where it is tagged with that pos
+	# pos must be string
+	words_and_length_list = []
+	tagged_words_tag_pos = "tagged_words_tag_%s"%pos
+	# get list of words (format: 'word_(word)') from tagged_words_tag_pos
+	tagged_words = get_list(tagged_words_tag_pos)
+	for word_word in tagged_words:
+		# get number of tweets word is in
+		tweet_tag_word_word_tag_pos = 'tweet_tag_%s_tag_%s'%(word_word, pos)
+		num_tweets = get_num_list(tweet_tag_word_word_tag_pos)
+		word = get_string_num(word_word)
+		words_and_length_list.append((word, num_tweets))
+	return words_and_length_list
+
+#### End Visualization Functions ####
 
 #### End Flask Uses ####
 
