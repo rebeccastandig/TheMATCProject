@@ -241,7 +241,6 @@ def auth_login(user_name, pw):
 def get_corpus_pos():
 	# sec 1 of corpus = list of words tagged w/pos
 	#  so it'll be a dictionary with the key == POS, value == list of words
-
 	corpus = ""
 	tag_list = get_list('tags')
 	for tag in tag_list:
@@ -317,7 +316,7 @@ def get_tags_by_word(word):
 	return tags
 	
 def get_words_by_tag(tag):
-	key = 'tagged_words_tag_%s'%tag
+	key = 'tagged_words_%s'%tag
 	# returns list of words ['word_gvold', 'word_blah', etc]
 	word_list = get_list(key)
 	words = []

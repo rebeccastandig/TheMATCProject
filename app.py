@@ -206,8 +206,6 @@ def corpus_download_words():
 	
 @app.route("/corpus/browse")
 def corpus_browse():
-	# i'd like to add searching ability too
-	# for searching, they'd just have to search like 'word_whatever they're searching for' etc
 	if session:
 		logged_in = 'Logged in as: %s.'%session['user']
 		not_you = 'Not %s?'%session['user']
