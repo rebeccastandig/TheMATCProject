@@ -151,9 +151,7 @@ def add_tweet_tag_word_tag_pos(word, pos, tweet):
 	# word, tweet, & pos must be string
 	tweet_tag_word_word_tag_pos = 'tweet_tag_word_%s_%s'%(word, pos)
 	prior_tweet_list = get_list(tweet_tag_word_word_tag_pos)
-	if tweet in prior_tweet_list:
-		pass
-	else:
+	if tweet not in prior_tweet_list:
 		r_server.rpush(tweet_tag_word_word_tag_pos, tweet)
 
 def add_tagged_words_pos(pos, word_list):
