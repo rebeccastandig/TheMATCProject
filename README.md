@@ -36,7 +36,7 @@ If a word is a user name, emoticon, number, meta word (such as 'RT'), non-word (
 ###Check Words Against A Dictionary
 #####celery_tasks.py, wordnik_api.py
 
-The words that make it through tweet_cleaner.py are then sent to wordnik_api.py. There,each word in a tweet is checked against the Wordnik corpus (which pulls from The American Heritage Dictionary, WordNet, Wiktionary, and a variety of other sources).
+The words that make it through tweet_cleaner.py are then sent to wordnik_api.py. There, each word in a tweet is checked against the Wordnik corpus (which pulls from The American Heritage Dictionary, WordNet, Wiktionary, and a variety of other sources).
 
 ###Put Words & Tweets In The Database
 #####celery_tasks.py, model.py
