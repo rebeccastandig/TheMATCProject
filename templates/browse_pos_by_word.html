@@ -7,7 +7,8 @@
 <p>
 	<h2>Part of Speech Tags for {{word}}</h2>
 </p>
-{% for tag in tag_list %}
+<p>Please refer to the <a href="{{url_for('guide')}}">part of speech guide</a> for more information on what each tag refers to.</p>
+<!-- {% for tag in tag_list %} -->
 <!-- <p>
 	<h3><a href="/corpus/browse/pos/{{tag}}">{{tag}}</a></h3>
 </p> -->
@@ -26,5 +27,5 @@
 		</td>
 	</tr>
 </table>
-{% endfor %}
+<!-- {% endfor %} -->
 {% endblock %}
