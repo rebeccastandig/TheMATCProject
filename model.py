@@ -256,7 +256,7 @@ def get_corpus_pos():
 				# returns '(word)'
 				word = word_word.lstrip('word_')
 				word_list.append(word)
-			corpus += "%s: %s \n"%(tag_name, word_list)
+			corpus += "%s, %s \n"%(tag_name, word_list)
 	return corpus
 	
 
