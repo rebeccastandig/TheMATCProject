@@ -250,13 +250,14 @@ def get_corpus_pos():
 		tagged_words = get_list(key)
 		# returns '(pos)' or '(diff pos)'
 		tag_name = tag.lstrip('tag_')
-		word_list = []
+		# word_list = []
 		if len(tagged_words) > 0:
 			for word_word in tagged_words:
 				# returns '(word)'
 				word = word_word.lstrip('word_')
-				word_list.append(word)
-			corpus[tag_name, word_list] = tag_name
+				corpus[tag_name, word] = 'yes'
+				# word_list.append(word)
+			# corpus[tag_name, word_list] = tag_name
 	return corpus
 	
 
