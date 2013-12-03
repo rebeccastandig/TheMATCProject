@@ -187,9 +187,7 @@ def add_final_tag(word, tag_list):
 	final_tag_word_word = 'final_tag_word_%s'%word
 	prior_tag_list = get_list(final_tag_word_word)
 	for tag in tag_list:
-		if tag in prior_tag_list:
-			pass
-		else:
+		if tag not in prior_tag_list:
 			r_server.rpush(final_tag_word_word, tag)
 
 def set_game_words_tweets(word_list, tweet):
