@@ -414,7 +414,7 @@ def add_pts_game(word, pos, user):
 				add_user_pts(user_name_pts, 10)
 			word_word = "word_%s"%word
 			word_list = [word_word]
-			tag_tag = "tag_%s"%pos
+			tag_tag = "%s"%pos
 			tag_list = [tag_tag]
 			add_tagged_words_pos(pos, word_list)
 			add_final_tag(word, tag_list)

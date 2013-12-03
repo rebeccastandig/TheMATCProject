@@ -237,7 +237,8 @@ def corpus_words_list():
 
 @app.route("/corpus/browse/pos/<tag>")
 def corpus_pos(tag):
-	word_list = model.get_words_by_tag(tag)
+	tag_pos = 'tag_%s'%tag
+	word_list = model.get_words_by_tag(tag_pos)
 	if session:
 		logged_in = 'Logged in as: %s.'%session['user']
 		not_you = 'Not %s?'%session['user']
