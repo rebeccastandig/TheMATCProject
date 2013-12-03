@@ -242,7 +242,8 @@ def get_corpus_pos():
 	# sec 1 of corpus = list of words tagged w/pos
 	#  so it'll be a dictionary with the key == POS, value == list of words
 
-	corpus = []
+	corpus = {}
+	corpus_list=[]
 	tag_list = get_list('tags')
 	for tag in tag_list:
 		key = 'tagged_words_%s'%tag
@@ -256,7 +257,8 @@ def get_corpus_pos():
 				# returns '(word)'
 				word = word_word.lstrip('word_')
 				word_list.append(word)
-			corpus.append((tag_name, word_list))
+			corpus_list.append((tag_name, word_list))
+			corpus[corpus_list] = tag_name
 	return corpus
 	
 
