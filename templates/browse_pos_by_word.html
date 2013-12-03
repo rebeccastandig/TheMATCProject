@@ -7,25 +7,9 @@
 <p>
 	<h2>Part of Speech Tags for {{word}}</h2>
 </p>
-<p>Please refer to the <a href="{{url_for('guide')}}">part of speech guide</a> for more information on what each tag refers to.</p>
-<!-- {% for tag in tag_list %} -->
-<!-- <p>
+{% for tag in tag_list %}
+<p>
 	<h3><a href="/corpus/browse/pos/{{tag}}">{{tag}}</a></h3>
-</p> -->
-
-<table>
-	<tr>
-		<td>
-		{% for tag in first_half %}
-		<h3><a href="/corpus/browse/pos/{{tag}}">{{tag}}</a></h3>
-		{% endfor %}
-		</td>
-		<td>
-		{% for tag_sent in second_half %}
-		<h3><a href="/corpus/browse/pos/{{tag}}">{{tag}}</a></h3>
-		{% endfor %}
-		</td>
-	</tr>
-</table>
-<!-- {% endfor %} -->
+</p>
+{% endfor %}
 {% endblock %}

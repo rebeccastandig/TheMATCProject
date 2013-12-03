@@ -216,12 +216,14 @@ def corpus_browse():
 @app.route("/corpus/browse/pos")
 def corpus_pos_list():
 	tag_list = model.get_pos()
+	first_half = tag_list[:len(tag_list)/2]
+	second_half = tag_list[len(tag_list)/2:]
 	if session:
 		logged_in = 'Logged in as: %s.'%session['user']
 		not_you = 'Not %s?'%session['user']
-		return render_template('browse_list_pos.html', logged_in=logged_in, corpus_list=tag_list, not_you=not_you)
+		return render_template('browse_list_pos.html', logged_in=logged_in, corpus_list=tag_list, not_you=not_you, first_half=first_half, second_half=second_half)
 	else:
-		return render_template('browse_list_pos.html', corpus_list=tag_list)
+		return render_template('browse_list_pos.html', corpus_list=tag_list, first_half=first_half, second_half=second_half)
 	
 @app.route("/corpus/browse/words")
 def corpus_words_list():
@@ -247,14 +249,12 @@ def corpus_pos(tag):
 @app.route("/corpus/browse/words/<word>")
 def corpus_word(word):
 	tag_list = model.get_tags_by_word(word)
-	first_half = tag_list[:len(tag_list)/2]
-	second_half = tag_list[len(tag_list)/2:]
 	if session:
 		logged_in = 'Logged in as: %s.'%session['user']
 		not_you = 'Not %s?'%session['user']
 		return render_template('browse_pos_by_word.html', logged_in=logged_in, tag_list=tag_list, word=word, not_you=not_you)
 	else:
-		return render_template('browse_pos_by_word.html', tag_list=tag_list, first_half=first_half, second_half=second_half, word=word)
+		return render_template('browse_pos_by_word.html', tag_list=tag_list, word=word)
 
 #### End Corpus Functionality ####
 
