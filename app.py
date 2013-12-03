@@ -228,19 +228,12 @@ def corpus_pos_list():
 @app.route("/corpus/browse/words")
 def corpus_words_list():
 	word_list = model.get_words()
-	all_words = []
-
-	for word in word_list:
-		# tags is a list here
-		tags = model.get_tags_by_word(word)
-		for tag in tags:
-			all_words.append((word, tag))
 	if session:
 		logged_in = 'Logged in as: %s.'%session['user']
 		not_you = 'Not %s?'%session['user']
-		return render_template('browse_list_words.html', logged_in=logged_in, corpus_list=all_words, not_you=not_you)
+		return render_template('browse_list_words.html', logged_in=logged_in, corpus_list=word_list, not_you=not_you)
 	else:
-		return render_template('browse_list_words.html', corpus_list=all_words)
+		return render_template('browse_list_words.html', corpus_list=word_list)
 
 @app.route("/corpus/browse/pos/<tag>")
 def corpus_pos(tag):

@@ -4,10 +4,9 @@
 	<a href="{{url_for('logout')}}">{{not_you}}</a></p>
 {% endblock %}
 {% block body %}
-{% for word_tags in corpus_list %}
+{% for word in corpus_list %}
 <p>
-	<!-- need to acct for multiple tags -->
-	<h3><a href="/corpus/browse/pos/{{word_tags[1]}}">{{word_tags[0]}}</a></h3>
+	<h3><a href="/corpus/browse/words/{{word}}">{{word}}</a></h3>
 </p>
 {% endfor %}
 {% endblock %}
