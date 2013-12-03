@@ -34,7 +34,7 @@ Each tweet is added the Redis ToGo database. These tweets are then sent via Cele
 If a word is a user name, emoticon, number, meta word (such as 'RT'), non-word (such as 'haha'), url, or contains non-English letters, it is ignored.
 
 ###Check Words Against A Dictionary
-####celery_tasks.py, wordnik_api.py
+#####celery_tasks.py, wordnik_api.py
 
 The words that make it through tweet_cleaner.py are then sent to wordnik_api.py. There,each word in a tweet is checked against the Wordnik corpus (which pulls from The American Heritage Dictionary, WordNet, Wiktionary, and a variety of other sources).
 
