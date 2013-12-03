@@ -26,18 +26,6 @@ def get_string_num(key):
 
 #### Basic Setting Values ####
 
-def set_word(word):
-	# sets word_(word)
-	# word must be string
-	word_word = "word_%s"%word
-	r_server.set(word_word, word)
-
-def set_tag(pos):
-	# sets tag_(POS)
-	# pos must be string
-	tag_pos = 'tag_%s'%pos
-	r_server.set(tag_pos, pos)
-
 def set_sent_pos_tag(pos, sentences):
 	# sets sent_(POS)_tag
 	# pos must be string
@@ -147,17 +135,6 @@ def add_user_pts(user_name_pts, pts):
 	r_server.incr(user_name_pts, pts)
 	# leaving pts open so i can write diff function that will discriminate when to add 10 vs 5
 
-def add_user_tag_word(user, word, tag):
-	# sets & appends to user_(name)_tag_word_(word)
-	# user & word must be strings
-	# tag must be string in 'tag_(POS)' format
-	user_name_tag_word_word = 'user_%s_tag_word_%s'%(user, word)
-	prior_tag_list = get_list(user_name_tag_word_word)
-	if tag in prior_tag_list:
-		pass
-	else:
-		r_server.rpush(user_name_tag_word_word, tag)
-
 def add_tag_word_tag_pos(word, pos, user):
 	# sets & appends to tag_word_(word)_tag_(POS)
 	# word & pos must be strings
@@ -221,7 +198,6 @@ def set_game_words_tweets(word_list, tweet):
 	# ***need to check to make sure no words are '(pos)_tweets' or anything like that before adding to word list.***
 	add_all_words(word_list)
 	for word in word_list:
-		set_word(word)
 		add_word_tweets(word, tweet)
 	print "success"
 
@@ -273,12 +249,12 @@ def get_corpus_pos():
 		# returns ['word_(word)','word_(diff word)']
 		tagged_words = get_list(key)
 		# returns '(pos)' or '(diff pos)'
-		tag_name = get_string_num(tag)
+		tag_name = tag.lstrip('tag_')
 		word_list = []
 		if len(tagged_words) > 0:
 			for word_word in tagged_words:
 				# returns '(word)'
-				word = get_string_num(word_word)
+				word = word_word.lstrip('word_')
 				word_list.append(word)
 			corpus[tag_name] = word_list
 	return corpus
@@ -295,12 +271,12 @@ def get_corpus_words():
 		# returns ['tag_(pos)', 'tag_(diff pos)']
 		tag_list = get_list(key)
 		# returns '(word)'
-		word = get_string_num(word_word)
+		word = word_word.lstrip('word_')
 		pos_list = []
 		if len(tag_list) > 0:
 			for tag_tag in tag_list:
 				# returns '(tag)'
-				tag = get_string_num(tag_tag)
+				tag = tag_tag.lstrip('tag_')
 				pos_list.append(tag)
 			corpus[word] = pos_list
 	return corpus 
@@ -311,7 +287,7 @@ def get_pos():
 	tags = []
 	for tag in tag_list:
 		# returns ['(pos)','(pos)']
-		pos = get_string_num(tag)
+		pos = tag.lstrip('tag_')
 		tags.append(pos)
 	tags.sort()
 	return tags
@@ -324,7 +300,7 @@ def get_words():
 		key = 'final_tag_%s'%word_word
 		tag_list = get_list(key)
 		if len(tag_list) > 0:
-			word = get_string_num(word_word)
+			word = word_word.lstrip('word_')
 			words.append(word)
 	words.sort()
 	return words
@@ -335,7 +311,7 @@ def get_tags_by_word(word):
 	tag_list = get_list(key)
 	tags = []
 	for tag_item in tag_list:
-		tag = get_string_num(tag_item)
+		tag = tag_item.lstrip('tag_')
 		tags.append(tag)
 	tags.sort()
 	return tags
@@ -346,7 +322,7 @@ def get_words_by_tag(tag):
 	word_list = get_list(key)
 	words = []
 	for word_item in word_list:
-		word = get_string_num(word_item)
+		word = word_item.lstrip('word_')
 		words.append(word)
 	words.sort()
 	return words
@@ -365,7 +341,7 @@ def get_words_tweets_game():
 	word_list = []
 	for word_word in words:
 		# returns '(word)'
-		word = get_string_num(word_word)
+		word = word_word.lstrip('word_')
 		# word_list will look like ['word', 'diff word', etc]
 		word_list.append(word)
 
@@ -411,9 +387,6 @@ def tag_word_game(word, pos, user, tweet):
 	# pos comes in as tag_(POS)
 	# tags a word from the game with tag_POS
 	if pos != 'tag_U':
-		# user_(name)_tag_word_(word)
-		add_user_tag_word(user, word, pos)
-
 		# tag_word_(word)_tag_(POS)
 		add_tag_word_tag_pos(word, pos, user)
 
@@ -516,7 +489,7 @@ def final_tags_pos(pos):
 		# get number of tweets word is in
 		tweet_tag_word_word_tag_pos = 'tweet_tag_%s_tag_%s'%(word_word, pos)
 		num_tweets = get_num_list(tweet_tag_word_word_tag_pos)
-		word = get_string_num(word_word)
+		word = word_word.lstrip('word_')
 		words_and_length_list.append((word, num_tweets))
 	return words_and_length_list
 
