@@ -408,7 +408,7 @@ def add_pts_game(word, pos, user):
 		if len(users_tagged_as_pos) == 5:
 			# give each user 10 pts
 			for user_name in users_tagged_as_pos:
-				user_name_pts = "user_%s_pts"%user_name
+				user_name_pts = "%s_pts"%user_name
 				add_user_pts(user_name_pts, 10)
 			word_word = "word_%s"%word
 			word_list = [word_word]
@@ -420,7 +420,7 @@ def add_pts_game(word, pos, user):
 		elif len(users_tagged_as_pos) > 5:
 			# give each user 5 pts
 			for user_name in users_tagged_as_pos:
-				user_name_pts = "user_%s_pts"%user_name
+				user_name_pts = "%s_pts"%user_name
 				add_user_pts(user_name_pts, 5)
 			tag_tag = "%s"%pos
 			tag_list = [tag_tag]
