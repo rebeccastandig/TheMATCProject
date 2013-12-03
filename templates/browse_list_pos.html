@@ -4,10 +4,6 @@
 	<a href="{{url_for('logout')}}">{{not_you}}</a></p>
 {% endblock %}
 {% block body %}
-<!-- {% for tag in corpus_list %}
-<p>
-	<h3><a href="/corpus/browse/pos/{{tag}}">{{tag}}</a></h3>
-</p> -->
 <p>Please refer to the <a href="{{url_for('guide')}}">part of speech guide</a> for more information on what each tag refers to.</p>
 <table>
 	<tr>
@@ -23,5 +19,4 @@
 		</td>
 	</tr>
 </table>
-<!-- {% endfor %} -->
 {% endblock %}
