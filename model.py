@@ -403,7 +403,8 @@ def add_pts_game(word, pos, user):
 	if pos != 'U':
 		tag_word_word_tag_pos = "tag_word_%s_%s"%(word, pos)
 		users_tagged_as_pos = get_list(tag_word_word_tag_pos)
-		if len(users_tagged_as_pos) == 5:
+		current_user = 'user_%s'%user
+		if len(users_tagged_as_pos) == 5 and current_user not in users_tagged_as_pos:
 			# give each user 10 pts
 			for user_name in users_tagged_as_pos:
 				user_name_pts = "%s_pts"%user_name
