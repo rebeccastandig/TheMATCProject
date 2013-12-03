@@ -229,9 +229,10 @@ def corpus_pos_list():
 def corpus_words_list():
 	word_list = model.get_words()
 	all_words = []
+
 	for word in word_list:
 		# tags is a list here
-		tags = model.get_tags_by_word()
+		tags = model.get_tags_by_word(word)
 		for tag in tags:
 			all_words.append((word, tag))
 	if session:
