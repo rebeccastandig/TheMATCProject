@@ -146,17 +146,15 @@ def add_tag_word_tag_pos(word, pos, user):
 	else:
 		r_server.rpush(tag_word_word_tag_pos, user)
 
-def add_tweet_tag_word_tag_pos(word, pos, tweet_list):
+def add_tweet_tag_word_tag_pos(word, pos, tweet):
 	# sets & appends to tweet_tag_word_(word)_tag_(POS)
-	# word & pos must be string
-	# tweet(s) must be in a list, in '(tweet)' format
-	tweet_tag_word_word_tag_pos = 'tweet_tag_word_%s_tag_%s'%(word, pos)
+	# word, tweet, & pos must be string
+	tweet_tag_word_word_tag_pos = 'tweet_tag_word_%s_%s'%(word, pos)
 	prior_tweet_list = get_list(tweet_tag_word_word_tag_pos)
-	for tweet in tweet_list:
-		if tweet in prior_tweet_list:
-			pass
-		else:
-			r_server.rpush(tweet_tag_word_word_tag_pos, tweet)
+	if tweet in prior_tweet_list:
+		pass
+	else:
+		r_server.rpush(tweet_tag_word_word_tag_pos, tweet)
 
 def add_tagged_words_pos(pos, word_list):
 	# sets & appends to tagged_words_tag_(POS)
@@ -387,7 +385,8 @@ def tag_word_game(word, pos, user, tweet):
 	# tags a word from the game with tag_POS
 	if pos != 'tag_U':
 		# tag_word_(word)_tag_(POS)
-		add_tag_word_tag_pos(word, pos, user)
+		user_name = 'user_%s'%user
+		add_tag_word_tag_pos(word, pos, user_name)
 
 		# tweet_tag_word_(word)_tag_(POS)
 		add_tweet_tag_word_tag_pos(word, pos, [tweet])
