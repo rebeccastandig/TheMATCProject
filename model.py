@@ -401,7 +401,7 @@ def add_pts_game(word, pos, user):
 	# also adds words to their final tags if verified
 
 	if pos != 'U':
-		tag_word_word_tag_pos = "tag_word_%s_tag_%s"%(word, pos)
+		tag_word_word_tag_pos = "tag_word_%s_%s"%(word, pos)
 		users_tagged_as_pos = get_list(tag_word_word_tag_pos)
 		if len(users_tagged_as_pos) == 5:
 			# give each user 10 pts
