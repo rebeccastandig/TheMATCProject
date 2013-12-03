@@ -61,7 +61,8 @@
 		$('button.game').click(function(){
 			var tag = $(this).attr('id');
 			var word = "{{word}}";
-			$.post("/game", {"tag": tag, "word": word}, function(responseFromServer){
+			var tweet = "{{tweet}}";
+			$.post("/game", {"tag": tag, "word": word, "tweet": tweet}, function(responseFromServer){
 				location.reload();
 			});
 
