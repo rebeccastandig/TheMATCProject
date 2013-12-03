@@ -139,7 +139,7 @@ def add_tag_word_tag_pos(word, pos, user):
 	# sets & appends to tag_word_(word)_tag_(POS)
 	# word & pos must be strings
 	# user must be string in 'user_(name)' format
-	tag_word_word_tag_pos = 'tag_word_%s_tag_%s'%(word, pos)
+	tag_word_word_tag_pos = 'tag_word_%s_%s'%(word, pos)
 	prior_user_list = get_list(tag_word_word_tag_pos)
 	if user in prior_user_list:
 		pass
