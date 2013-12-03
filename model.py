@@ -160,7 +160,7 @@ def add_tagged_words_pos(pos, word_list):
 	# sets & appends to tagged_words_tag_(POS)
 	# pos must be string
 	# word(s) must be in a list, in 'word_(word)' format
-	tagged_words_tag_pos = 'tagged_words_tag_%s'%pos
+	tagged_words_tag_pos = 'tagged_words_%s'%pos
 	prior_word_list = get_list(tagged_words_tag_pos)
 	for word in word_list:
 		if word in prior_word_list:
