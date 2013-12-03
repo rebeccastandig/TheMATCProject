@@ -256,7 +256,7 @@ def get_corpus_pos():
 				# returns '(word)'
 				word = word_word.lstrip('word_')
 				word_list.append(word)
-		corpus[tag_name] = word_list
+			corpus[tag_name] = word_list
 	return corpus
 	
 
@@ -278,7 +278,7 @@ def get_corpus_words():
 				# returns '(tag)'
 				tag = tag_tag.lstrip('tag_')
 				pos_list.append(tag)
-		corpus[word] = pos_list
+			corpus[word] = pos_list
 	return corpus 
 
 def get_pos():
