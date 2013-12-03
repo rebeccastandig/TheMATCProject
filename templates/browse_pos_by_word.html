@@ -8,8 +8,23 @@
 	<h2>Part of Speech Tags for {{word}}</h2>
 </p>
 {% for tag in tag_list %}
-<p>
+<!-- <p>
 	<h3><a href="/corpus/browse/pos/{{tag}}">{{tag}}</a></h3>
-</p>
+</p> -->
+
+<table>
+	<tr>
+		<td>
+		{% for tag in first_half %}
+		<h3><a href="/corpus/browse/pos/{{tag}}">{{tag}}</a></h3>
+		{% endfor %}
+		</td>
+		<td>
+		{% for tag_sent in second_half %}
+		<h3><a href="/corpus/browse/pos/{{tag}}">{{tag}}</a></h3>
+		{% endfor %}
+		</td>
+	</tr>
+</table>
 {% endfor %}
 {% endblock %}
