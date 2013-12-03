@@ -422,6 +422,9 @@ def add_pts_game(word, pos, user):
 			for user_name in users_tagged_as_pos:
 				user_name_pts = "user_%s_pts"%user_name
 				add_user_pts(user_name_pts, 5)
+			tag_tag = "%s"%pos
+			tag_list = [tag_tag]
+			add_final_tag(word, tag_list)
 	else:
 		# don't give them any points if not verified yet
 		pass
