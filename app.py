@@ -33,8 +33,8 @@ def register():
 			elif pw_is_alphanum == False:
 				flash('Invalid password. Alphanumeric characters only (A-Z, a-z, 0-9).')
 				return render_template("register.html")
-			elif 6 > len(name) or 15 < len(name):
-				flash('Invalid user name. User name must be between 6 and 15 characters.')
+			elif 5 > len(name) or 15 < len(name):
+				flash('Invalid user name. User name must be between 5 and 15 characters.')
 				return render_template("register.html")
 			elif 6 > len(pw) or 15 < len(pw):
 				flash('Invalid password. Password must be between 6 and 15 characters.')
