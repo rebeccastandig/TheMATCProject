@@ -4,6 +4,7 @@
 	<a href="{{url_for('logout')}}">{{not_you}}</a></p>
 {% endblock %}
 {% block body %}
+<p>Please refer to the <a href="{{url_for('guide')}}">part of speech guide</a> for more information on what each tag refers to.</p>
 <p>
 	<h2>
 		<a href="{{url_for('corpus_pos_list')}}">Browse by part of speech</a>
