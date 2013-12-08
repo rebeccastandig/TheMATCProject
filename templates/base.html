@@ -8,6 +8,16 @@
         <script type="text/javascript" src="http://d3js.org/d3.v2.js"></script>
         <script type="text/javascript" src="http://www.treesheets.org/hotlink/cts.js"></script>
         <script type="text/cts" src="http://people.csail.mit.edu/eob/cts/widgets/bubblechart.cts"></script>
+         <script type="text/javascript">
+        var Keen=Keen||{configure:function(e){this._cf=e},addEvent:function(e,t,n,i){this._eq=this._eq||[],this._eq.push([e,t,n,i])},setGlobalProperties:function(e){this._gp=e},onChartsReady:function(e){this._ocrq=this._ocrq||[],this._ocrq.push(e)}};(function(){var e=document.createElement("script");e.type="text/javascript",e.async=!0,e.src=("https:"==document.location.protocol?"https://":"http://")+"dc8na2hxrj29i.cloudfront.net/code/keen-2.1.0-min.js";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)})();
+
+        // Configure the Keen object with your Project ID and access keys.
+        Keen.configure({
+            projectId: "52a4cddd05cd660536000001",
+            writeKey: "873bf334c14dcdbfe3a83163066e8238294ad90c3fdb8f2b50f14c66c2597c74e198108d81d5a131133aac6551c15f6f3b6b4ef0bd289d9b91f0e120a44d5d61473c63cec7c8b1fc0e29d1ac2a44f84b021cdcbc1e6f9107e8c9c2b39b87c295db2de968f580fe98eed7bf502d698c2e", // required for sending events
+            readKey: "8ccc7e713b4d578f0e23695ec6f90b10a113b957578bb5727730b3ade6336b99e087758380891af08abcc266510194417aebe4160322507c83ebe5ee49255ef8195c4f80385f8edf6e52d8166e7a69ced5a541cf1ee43f0a4b63c23cf2a756a6d3fe045a5934f1e0e253bc145da5fe5c"    // required for doing analysis
+        });
+    </script>
     </head>
     <body>
         <div class="navigation">

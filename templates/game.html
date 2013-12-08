@@ -36,7 +36,7 @@
 	<tr>
 		<td>
 		{% for tag_sent in first_half %}
-		<button class="game" id="{{tag_sent[0]}}" value="{{tag_sent[1]}}">
+		<button class="game" id="{{tag_sent[0]}}" value="{{tag_sent[1]}}" onclick="engage()">
 					{{tag_sent[1]}}
 		</button>
 		<br>
@@ -44,7 +44,7 @@
 		</td>
 		<td>
 		{% for tag_sent in second_half %}
-		<button class="game" id="{{tag_sent[0]}}" value="{{tag_sent[1]}}">
+		<button class="game" id="{{tag_sent[0]}}" value="{{tag_sent[1]}}" onclick="engage()">
 					{{tag_sent[1]}}
 		</button>
 		<br>
@@ -62,6 +62,22 @@
 			var tag = $(this).attr('id');
 			var word = "{{word}}";
 			var tweet = "{{tweet}}";
+			var name = "{{user}}"
+			var num_tagged = "{{num_tagged}}"
+			var num_final_tagged = "{{num_final_tagged}}"
+			var engage = function(){
+				var buttonProperties{
+					"pos": tag,
+					"word": word,
+					"user":{
+						"name": name,
+						"num_tagged":num_tagged
+						"num_final_tagged": num_final_tagged
+					}
+
+				};
+				return Keen.addEvent('tag_pos', buttonProperties);
+			};
 			$.post("/game", {"tag": tag, "word": word, "tweet": tweet}, function(responseFromServer){
 				location.reload();
 			});
@@ -77,6 +93,7 @@
 			});
 		});
 	});
+
 </script>
 </div>
 {% endblock %}
