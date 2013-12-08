@@ -50,6 +50,9 @@ def register():
 				else:
 					model.set_user(name)
 					model.set_user_pw(name, pw)
+					keen.add_event('register', {
+						'username':name
+						})
 					flash('Thanks for registering! You\'re now signed in.')
 					session['user'] = name
 					return redirect(url_for('index'))
@@ -76,6 +79,9 @@ def signin():
 				pw_is_alphanum = model.check_alphanum(pw)
 				if name_is_alphanum == True and pw_is_alphanum == True:
 					if model.auth_login(name, pw) == True:
+						keen.add_event('signins', {
+							"username":name
+							})
 						session['user'] = name
 						return redirect(url_for('index'))
 					else:
@@ -197,11 +203,17 @@ def corpus_download():
 
 @app.route("/corpus/download/pos")
 def corpus_download_pos():
+	keen.add_event("corpus_dl", {
+		"type":"pos"
+		})
 	corpus = model.get_corpus_pos()
 	return Response(corpus, mimetype='text/csv')
 
 @app.route("/corpus/download/words")
 def corpus_download_words():
+	keen.add_event("corpus_dl", {
+		"type":"words"
+		})
 	corpus = model.get_corpus_words()
 	return Response(corpus, mimetype='text/csv')
 	
@@ -287,6 +299,16 @@ def game():
 		logged_in = 'Logged in as: %s.'%user
 		not_you = 'Not %s?'%session['user']
 
+		num_tagged = model.get_num_tagged(user)
+		num_final_tagged = model.get_num_final_tagged(user)
+
+		keen.add_event('game_play', {
+			"user":user,
+			"points":user_points,
+			"num_tagged":num_tagged,
+			"num_final_tagged":num_final_tagged
+			})
+
 		return render_template('game.html', word = word_for_game, tweet = Markup(tweet_for_game).unescape(), user_points=user_points, tweet_list=tweet_list, first_half=first_half, second_half=second_half, logged_in=logged_in, user=user, not_you=not_you)
 	
 
@@ -298,13 +320,6 @@ def play_game():
 	user = session['user']
 	num_tagged = model.get_num_tagged(user)
 	num_final_tagged = model.get_num_final_tagged(user)
-	keen.add_event("button_press", {
-		"tag":tag,
-		"word":word,
-		"user":user,
-		"num_tagged":num_tagged,
-		"num_final_tagged":num_final_tagged
-		})
 	if tag and word:
 		# set the tag for the user and the tweet
 		model.tag_word_game(word, tag, user, tweet)
@@ -313,12 +328,33 @@ def play_game():
 		# retrieve how many points user has
 		user_name_pts = "user_%s_pts"%user
 		num_points = model.get_string_num(user_name_pts)
+		keen.add_event("button_press", {
+		"tag":tag,
+		"word":word,
+		"user":user,
+		"num_tagged":num_tagged,
+		"num_final_tagged":num_final_tagged,
+		"points":num_points
+		})
 		return str(num_points)
 
 @app.route("/game/more_tweets", methods=['POST'])
 def new_tweet():
 	word = request.form.get('word')
 	tweet = request.form.get('tweet')
+	user = session['user']
+	user_name_pts = "user_%s_pts"%user
+	points = model.get_string_num(user_name_pts)
+	num_tagged = model.get_num_tagged(user)
+	num_final_tagged = model.get_num_final_tagged(user)
+	keen.add_event('more_tweets', {
+		"user":user,
+		'word':word,
+		'original tweet':tweet,
+		'num_tagged':num_tagged,
+		'num_final_tagged':num_final_tagged,
+		'points':points
+		})
 	tweet_list = model.get_another_tweet(word, tweet)
 	tweets_gotten = request.form.get('tweets_gotten')
 	if tweets_gotten > 0:
