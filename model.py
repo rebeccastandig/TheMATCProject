@@ -496,6 +496,33 @@ def final_tags_pos(pos):
 
 #### End Visualization Functions ####
 
+#### Begin Keen IO Functions ####
+def get_num_tagged(user):
+	#gets the number of words tagged by user (given as string)
+	key = 'user_%s_words_tagged'%user
+	num_tagged = r_server.llen(key)
+	return num_tagged
+
+def get_num_final_tagged(user):
+	#gets the number of words given final tags by user (given as string)
+	key = 'user_%s_words_tagged'%user
+	num_tagged = r_server.lrange(key, 0, -1)
+	num_final_tagged = 0
+	for tag_word_word_tag_pos in num_tagged:
+		split_key = tag_word_word_tag_pos.split('_')
+		word = split_key[2]
+		tag_pos = "tag_%s"%split_key[4]
+		key = 'final_tag_word_%s'%word
+		if r_server.exists(key) == True:
+			final_tags = r_server.lrange(key, 0, -1)
+			if tag_pos in final_tags:
+				num_final_tagged += 1
+	return num_final_tagged
+
+
+
+#### End Keen IO Functions ####
+
 #### End Flask Uses ####
 
 
