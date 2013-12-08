@@ -9,6 +9,7 @@ billiard==2.7.3.34
 celery==3.0.24
 celery-with-redis==3.0
 itsdangerous==0.23
+keen==0.2.2
 kombu==2.5.16
 oauthlib==0.6.0
 python-dateutil==2.2
