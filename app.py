@@ -286,7 +286,10 @@ def game():
 		logged_in = 'Logged in as: %s.'%user
 		not_you = 'Not %s?'%session['user']
 
-		return render_template('game.html', word = word_for_game, tweet = Markup(tweet_for_game).unescape(), user_points=user_points, tweet_list=tweet_list, first_half=first_half, second_half=second_half, logged_in=logged_in, user=user, not_you=not_you)
+		num_tagged = model.get_num_tagged(user)
+		num_final_tagged = model.get_num_final_tagged(user)
+
+		return render_template('game.html', word = word_for_game, tweet = Markup(tweet_for_game).unescape(), user_points=user_points, tweet_list=tweet_list, first_half=first_half, second_half=second_half, logged_in=logged_in, user=user, not_you=not_you, num_tagged=num_tagged, num_final_tagged=num_final_tagged)
 	
 
 @app.route("/game", methods=['POST'])
