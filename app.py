@@ -10,13 +10,7 @@ app.secret_key = os.environ.get('flask_secretkey')
 
 @app.route("/")
 def index():
-	if not session:
-		return render_template('index.html')
-	else:
-		greeting = 'Hello %s!'%session['user']
-		logged_in = 'Logged in as: %s.'%session['user']
-		not_you = 'Not %s?'%session['user']
-		return render_template('index.html', greeting=greeting, logged_in=logged_in, not_you=not_you)
+	return redirect(url_for('about_tt'))
 
 @app.route("/register", methods=['GET', 'POST'])
 def register():
@@ -505,6 +499,18 @@ def vis_sc():
 
 
 #### End Visualization Functionality ####
+
+#### Admin Dashboard Functionality ####
+
+@app.route("/dashboard")
+def dashboard():
+	if session['user'] == 'rebecca':
+		return render_template('dashboard.html')
+	else:
+		redirect(url_for('index'))
+
+#### End Admin Dashboard Functionality ####
+
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=os.environ.get('PORT'))
