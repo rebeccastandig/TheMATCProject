@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, flash, redirect, url_for, session, Markup, Response
 import model
 import os
+import keen
 
 app = Flask(__name__)
 app.secret_key = os.environ.get('flask_secretkey')
@@ -286,10 +287,7 @@ def game():
 		logged_in = 'Logged in as: %s.'%user
 		not_you = 'Not %s?'%session['user']
 
-		num_tagged = model.get_num_tagged(user)
-		num_final_tagged = model.get_num_final_tagged(user)
-
-		return render_template('game.html', word = word_for_game, tweet = Markup(tweet_for_game).unescape(), user_points=user_points, tweet_list=tweet_list, first_half=first_half, second_half=second_half, logged_in=logged_in, user=user, not_you=not_you, num_tagged=num_tagged, num_final_tagged=num_final_tagged)
+		return render_template('game.html', word = word_for_game, tweet = Markup(tweet_for_game).unescape(), user_points=user_points, tweet_list=tweet_list, first_half=first_half, second_half=second_half, logged_in=logged_in, user=user, not_you=not_you)
 	
 
 @app.route("/game", methods=['POST'])
@@ -298,6 +296,15 @@ def play_game():
 	word = request.form.get('word')
 	tweet = request.form.get('tweet')
 	user = session['user']
+	num_tagged = model.get_num_tagged(user)
+	num_final_tagged = model.get_num_final_tagged(user)
+	keen.add_event("button_press", {
+		"tag":tag,
+		"word":word,
+		"user":user,
+		"num_tagged":num_tagged,
+		"num_final_tagged":num_final_tagged
+		})
 	if tag and word:
 		# set the tag for the user and the tweet
 		model.tag_word_game(word, tag, user, tweet)
