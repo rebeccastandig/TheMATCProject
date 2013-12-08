@@ -36,7 +36,7 @@
 	<tr>
 		<td>
 		{% for tag_sent in first_half %}
-		<button class="game" id="{{tag_sent[0]}}" value="{{tag_sent[1]}}" onclick="engage()">
+		<button class="game" id="{{tag_sent[0]}}" value="{{tag_sent[1]}}">
 					{{tag_sent[1]}}
 		</button>
 		<br>
@@ -44,7 +44,7 @@
 		</td>
 		<td>
 		{% for tag_sent in second_half %}
-		<button class="game" id="{{tag_sent[0]}}" value="{{tag_sent[1]}}" onclick="engage()">
+		<button class="game" id="{{tag_sent[0]}}" value="{{tag_sent[1]}}">
 					{{tag_sent[1]}}
 		</button>
 		<br>
@@ -57,26 +57,6 @@
 {% block javascript %}
 <script type="text/javascript">
 	var tweets_gotten = 0;
-	var tag = $('button.game').attr('id');
-	var word = "{{word}}";
-	var tweet = "{{tweet}}";
-	var name = "{{user}}"
-	var num_tagged = "{{num_tagged}}"
-	var num_final_tagged = "{{num_final_tagged}}"
-	var engage = function(){
-		var buttonProperties{
-			"pos": tag,
-			"word": word,
-			"user":{
-				"name": name,
-				"num_tagged":num_tagged
-				"num_final_tagged": num_final_tagged
-			}
-
-		};
-		return Keen.addEvent('tag_pos', buttonProperties);
-	};
-
 	$(document).ready(function(){
 		$('button.game').click(function(){
 			var tag = $(this).attr('id');
@@ -85,6 +65,19 @@
 			var name = "{{user}}"
 			var num_tagged = "{{num_tagged}}"
 			var num_final_tagged = "{{num_final_tagged}}"
+			var engage = function(){
+				var buttonProperties{
+					"pos": tag,
+					"word": word,
+					"user":{
+						"name": name,
+						"num_tagged":num_tagged
+						"num_final_tagged": num_final_tagged
+					}
+
+				};
+				return Keen.addEvent('tag_pos', buttonProperties);
+			};
 			$.post("/game", {"tag": tag, "word": word, "tweet": tweet}, function(responseFromServer){
 				location.reload();
 			});
