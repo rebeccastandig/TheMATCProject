@@ -505,7 +505,10 @@ def vis_sc():
 @app.route("/dashboard")
 def dashboard():
 	if session['user'] == 'rebecca':
-		return render_template('dashboard.html')
+		project_id = os.environ.get('KEEN_PROJECT_ID')
+		write_key = os.environ.get('KEEN_WRITE_KEY')
+		read_key = os.environ.get('KEEN_READ_KEY')
+		return render_template('dashboard.html', project_id=project_id, write_key=write_key, read_key=read_key)
 	else:
 		redirect(url_for('index'))
 
