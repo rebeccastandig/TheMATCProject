@@ -2,46 +2,10 @@
 {% block body %}
 <div id="visualization-test">
 	<div id="chart1">
+		<p>More tweets by word: {{more_tweets_word}}</p>
 	</div>
 	<div id="chart2">
+		<p>Players in the past hour: {{players_last_hr}}</p>
 	</div>
 </div>
-<script type="text/javascript" charset="utf-8">
-    
-    // LOOK HERE! This is where you will need to write the code to draw the charts using the Keen IO charting library.
-      
-    Keen.onChartsReady(function() {  // This function executes once the page is fully loaded
-        
-        // [] [] Item 1 [] [] [] [] [] [] [] [] [] [] [] [] 
-        // The first widget here is almost finished. Just insert your collection name and it should work.
-        // This is a counter for the total number of button clicks (all time running total).
-        
-        var metric = new Keen.Metric("more_tweets", {
-		    analysisType: "count",
-		    groupBy: "word"
-		});
-		metric.draw(document.getElementById("chart1"){
-			label: "New tweets needed by word"
-		});
-
-
-        
-        
-        // [] [] Item 2 [] [] [] [] [] [] [] [] [] [] [] [] 
-        // Find the total number of engagements sorted by header
-        // Draw it as a PieChart
-        // Reference Keen IO Javascript Reference Docs to find out how to do this
-
-        var metric = new Keen.Metric("game_play", {
-		    analysisType: "count",
-		    targetProperty: "keen.timestamp",
-		    groupBy: "user"
-		});
-		metric.draw(document.getElementById("chart2"){
-			label:"Game play by user"
-		});
-          
-      });
-      
-    </script>
 {% endblock %}
