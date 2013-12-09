@@ -2,7 +2,6 @@ import redis
 import hashlib
 import random
 import os
-import keen
 
 r_server = redis.from_url(os.environ.get('REDISCLOUD_URL'))
 
