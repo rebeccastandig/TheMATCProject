@@ -505,10 +505,9 @@ def vis_sc():
 @app.route("/dashboard")
 def dashboard():
 	if session['user'] == 'rebecca':
-		project_id = os.environ.get('KEEN_PROJECT_ID')
-		write_key = os.environ.get('KEEN_WRITE_KEY')
-		read_key = os.environ.get('KEEN_READ_KEY')
-		return render_template('dashboard.html', project_id=project_id, write_key=write_key, read_key=read_key)
+		more_tweets_word = keen.count("more_tweets", group_by="word")
+		players_last_hr = keen.count('game_play', group_by="user", timeframe="previous_60_minutes")
+		return render_template('dashboard.html', more_tweets_word=more_tweets_word, players_last_hr=players_last_hr)
 	else:
 		redirect(url_for('index'))
 
