@@ -1,0 +1,62 @@
+<head>
+	<script type="text/javascript">
+      // Include the Keen IO library for Analysis
+      var Keen=Keen||{configure:function(e){this._cf=e},addEvent:function(e,t,n,i){this._eq=this._eq||[],this._eq.push([e,t,n,i])},setGlobalProperties:function(e){this._gp=e},onChartsReady:function(e){this._ocrq=this._ocrq||[],this._ocrq.push(e)}};(function(){var e=document.createElement("script");e.type="text/javascript",e.async=!0,e.src=("https:"==document.location.protocol?"https://":"http://")+"dc8na2hxrj29i.cloudfront.net/code/keen-2.1.0-min.js";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)})();
+
+      // Configure the Keen object with your Project ID and access keys.
+      Keen.configure({
+          projectId: {{project_id}},
+          writeKey: {{write_key}}, // required for sending events
+          readKey: {{read_key}}    // required for doing analysis
+      });
+      
+    </script>
+   
+</head>
+{% extends 'base.html' %}
+{% block body %}
+<div id="visualization-test">
+	<div id="chart1">
+	</div>
+	<div id="chart2">
+	</div>
+</div>
+<script type="text/javascript" charset="utf-8">
+    
+    // LOOK HERE! This is where you will need to write the code to draw the charts using the Keen IO charting library.
+      
+      Keen.onChartsReady(function() {  // This function executes once the page is fully loaded
+        
+        // [] [] Item 1 [] [] [] [] [] [] [] [] [] [] [] [] 
+        // The first widget here is almost finished. Just insert your collection name and it should work.
+        // This is a counter for the total number of button clicks (all time running total).
+        
+        var metric = new Keen.Metric("more_tweets", {
+		    analysisType: "count",
+		    groupBy: "word"
+		});
+		metric.draw(document.getElementById("chart1"){
+			label: "New tweets needed by word"
+		});
+
+
+        
+        
+        // [] [] Item 2 [] [] [] [] [] [] [] [] [] [] [] [] 
+        // Find the total number of engagements sorted by header
+        // Draw it as a PieChart
+        // Reference Keen IO Javascript Reference Docs to find out how to do this
+
+        var metric = new Keen.Metric("game_play", {
+		    analysisType: "count",
+		    targetProperty: "keen.timestamp",
+		    groupBy: "user"
+		});
+		metric.draw(document.getElementById("chart2"){
+			label:"Game play by user"
+		});
+          
+      });
+      
+    </script>
+{% endblock %}
