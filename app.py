@@ -504,13 +504,15 @@ def vis_sc():
 
 @app.route("/dashboard")
 def dashboard():
-	if session:
+	if not session:
+		return redirect(url_for('index'))
+	else:
 		if session['user'] == 'rebecca':
 			more_tweets_word = keen.count("more_tweets", group_by="word")
 			players_last_hr = keen.count('game_play', group_by="user", timeframe="previous_60_minutes")
 			return render_template('dashboard.html', more_tweets_word=more_tweets_word, players_last_hr=players_last_hr)
-	else:
-		redirect(url_for('index'))
+		else:
+			return redirect(url_for('index'))
 
 #### End Admin Dashboard Functionality ####
 
